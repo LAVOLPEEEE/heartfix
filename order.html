@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>heartfix — набор HF-01</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+  <div class="container" style="gap: 40px">
+
+    <header class="header">
+      <a href="index.html" class="logo">heartfix<sup>®</sup></a>
+      <a href="index.html" class="mono-link">← назад</a>
+    </header>
+
+    <main class="order">
+      <div class="order__main">
+        <p class="eyebrow">заказ · шаг 1 из 1</p>
+        <h1 class="title">Набор HF-01</h1>
+        <p class="lead" style="max-width: 560px">Коробка с 26 деталями и инструкцией. Собираете по одной детали в день — примерно месяц. Доставка 2–3 дня.</p>
+
+        <div id="form" class="order__main" style="gap: 22px">
+          <div class="field">
+            <span class="field__label">для кого набор</span>
+            <div class="choices">
+              <button type="button" class="btn btn--choice is-active" data-for="self">себе</button>
+              <button type="button" class="btn btn--choice" data-for="gift">в подарок подруге</button>
+            </div>
+            <span class="field__note" id="forNote">деталь №03 — позовите подругу, одной её не поставить.</span>
+          </div>
+          <button type="button" class="btn btn--primary" id="orderBtn">Оформить заказ →</button>
+        </div>
+
+        <div class="done" id="done" hidden>
+          <div class="done__body">заказ принят. коробка приедет через 2–3 дня.<br><span id="doneNote">первую деталь можно поставить в день, когда откроете коробку.</span></div>
+          <div class="done__bar">а пока — деталь №04 бесплатно: не пиши ему.</div>
+        </div>
+      </div>
+
+      <aside class="order__side">
+        <span class="field__label">в коробке:</span>
+        <div class="parts">
+          <div class="part"><span class="part__num">01</span>винт «время»</div>
+          <div class="part"><span class="part__num">02</span>клей «прощение»</div>
+          <div class="part"><span class="part__num part__num--dark">03</span>подруги в 2 ночи</div>
+          <div class="part"><span class="part__num">04</span>фильтр «не пиши ему»</div>
+          <div class="part"><span class="part__num">05</span>плейлист «я королева»</div>
+          <div class="part"><span class="part__num">06</span>запасная улыбка</div>
+        </div>
+        <span class="field__note">… и ещё 20 деталей + инструкция по сборке</span>
+      </aside>
+    </main>
+
+  </div>
+</div>
+
+<script>
+  var notes = {
+    self: { pick: "деталь №03 — позовите подругу, одной её не поставить.", done: "первую деталь можно поставить в день, когда откроете коробку." },
+    gift: { pick: "положим открытку. деталь №03 — ваша, вы её и поставите.", done: "открытку положили. деталь №03 ждёт вас." }
+  };
+  var current = new URLSearchParams(location.search).get("gift") ? "gift" : "self";
+  var buttons = document.querySelectorAll("[data-for]");
+
+  function pick(who) {
+    current = who;
+    buttons.forEach(function (b) { b.classList.toggle("is-active", b.dataset.for === who); });
+    document.getElementById("forNote").textContent = notes[who].pick;
+  }
+
+  buttons.forEach(function (b) { b.addEventListener("click", function () { pick(b.dataset.for); }); });
+  document.getElementById("orderBtn").addEventListener("click", function () {
+    document.getElementById("doneNote").textContent = notes[current].done;
+    document.getElementById("form").hidden = true;
+    document.getElementById("done").hidden = false;
+  });
+  pick(current);
+</script>
+</body>
+</html>
