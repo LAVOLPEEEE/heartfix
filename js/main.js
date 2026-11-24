@@ -69,7 +69,7 @@ class Component extends DCLogic {
     const mesh=(geo,c,parent,thin,pos,rot)=>{const g=new T.Group();g.add(new T.Mesh(geo,toon(c)));g.add(new T.Mesh(geo,thin?INKS:INK));if(pos)g.position.set(pos[0],pos[1],pos[2]);if(rot)g.rotation.set(rot[0],rot[1],rot[2]);parent.add(g);return g;};
     const V3=(x,y,z)=>new T.Vector3(x,y,z);
     const ctex=(w,h,draw)=>{const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');draw(x,w,h);const t=new T.CanvasTexture(c);t.anisotropy=4;return t;};
-    const root=new T.Group();scene.add(root);const heart=new T.Group();heart.position.set(0.1,-0.35,0);heart.rotation.z=0.32;root.add(heart);scene.updateMatrixWorld(true);
+    const root=new T.Group();scene.add(root);const heart=new T.Group();heart.position.set(0.1,-0.62,0);heart.rotation.z=0.32;root.add(heart);scene.updateMatrixWorld(true);
     // ventricle shape: unit sphere -> organic, tapered to the apex
     const def=(x,y,z)=>{const k=y<0?1+y*0.3:1;const n=1+0.035*Math.sin(5*x+3*y)*Math.sin(4*z+2*y);return V3(x*1.45*k*n,y*1.72*n,z*1.2*k*n);};
     const dir=(x,y,z)=>{const v=V3(x,y,z).normalize();return def(v.x,v.y,v.z);};
@@ -142,7 +142,7 @@ class Component extends DCLogic {
     const ntag=(n)=>{const tx=ctex(96,64,(x,w,h)=>{x.fillStyle='#121212';x.font='600 40px "IBM Plex Mono", monospace';x.textBaseline='middle';x.fillText(n,6,34);});const sp=new T.Sprite(new T.SpriteMaterial({map:tx,transparent:true}));sp.scale.set(0.27,0.18,1);return sp;};
     const CELL=[];for(let i=0;i<16;i++){const c=V3(RX[i%2],RY0-Math.floor(i/2)*RS,-0.3);CELL.push(c);const tg=ntag((i<9?'0':'')+(i+1));tg.position.set(c.x-0.5,c.y+0.31,-0.38);rack.add(tg);}
     const sh2=ctex(512,128,(x,w,h)=>{x.clearRect(0,0,w,h);x.save();x.beginPath();x.ellipse(w/2,h/2,w/2-8,h/2-10,0,0,7);x.clip();x.strokeStyle='rgba(18,18,18,.55)';x.lineWidth=3;for(let i=-h;i<w+h;i+=11){x.beginPath();x.moveTo(i,h);x.lineTo(i+h,0);x.stroke();}x.restore();});
-    const shadow=new T.Mesh(new T.PlaneGeometry(4.6,0.95),new T.MeshBasicMaterial({map:sh2,transparent:true,depthWrite:false}));shadow.position.set(0.3,-2.75,-0.8);scene.add(shadow);
+    const shadow=new T.Mesh(new T.PlaneGeometry(4.6,0.95),new T.MeshBasicMaterial({map:sh2,transparent:true,depthWrite:false}));shadow.position.set(0.3,-3.02,-0.8);scene.add(shadow);
     this._mx=0;this._my=0;const onMove=(ev)=>{this._mx=(ev.clientX/window.innerWidth-0.5);this._my=(ev.clientY/window.innerHeight-0.5);};window.addEventListener('pointermove',onMove);
     const sm=(v)=>{v=Math.min(1,Math.max(0,v));return v*v*(3-2*v);};
     const tmp=V3(0,0,0),pw=V3(0,0,0),look=V3(0,0,0);
@@ -171,7 +171,7 @@ class Component extends DCLogic {
         const s=sockets[i];tmp.set(0,0,0);s.s.localToWorld(tmp);root.worldToLocal(tmp);
         const lift=Math.sin(q*Math.PI)*0.9;
         p.position.set(ox+(tmp.x-ox)*q,oy+(tmp.y-oy)*q+lift*0.3,oz+(tmp.z+0.05-oz)*q+lift);
-        if(u.fit==null){p.scale.setScalar(1);p.rotation.set(0,0,0);p.position.set(0,0,0);p.updateMatrixWorld(true);const bx=new T.Box3().setFromObject(p);const sz=bx.getSize(V3(0,0,0));u.fit=Math.min(1.0/Math.max(sz.x,sz.z*0.7,0.01),(RS*0.7)/Math.max(sz.y,0.01));}const sCell=u.fit*(this._rs||1);const sSock=(0.25+0.2*ic)*u.s;p.scale.setScalar((sCell+(sSock-sCell)*q)*(isSel?(q<0.5?1.08:1.5):1));p.rotation.set(0.15*(1-q),Math.sin(t*0.7+i)*0.5*(1-q)+(isSel?Math.sin(t*3)*0.4:0),0);if(isSel&&q>0.5)p.position.addScaledVector(V3(0,0,1),0.3+Math.sin(t*4)*0.05);
+        if(u.fit==null){p.scale.setScalar(1);p.rotation.set(0,0,0);p.position.set(0,0,0);p.updateMatrixWorld(true);const bx=new T.Box3().setFromObject(p);const sz=bx.getSize(V3(0,0,0));u.cOff=bx.getCenter(V3(0,0,0));u.fit=Math.min(0.92/Math.max(Math.hypot(sz.x,sz.z),0.01),0.58/Math.max(sz.y,0.01));}const sCell=u.fit*(this._rs||1);const sSock=(0.25+0.2*ic)*u.s;const scl=(sCell+(sSock-sCell)*q)*(isSel?(q<0.5?1.1:1.5):1);p.scale.setScalar(scl);p.rotation.set(0.12*(1-q),Math.sin(t*0.7+i)*0.35*(1-q)+(isSel?Math.sin(t*3)*0.3:0),0);{const off=u.cOff.clone().applyEuler(p.rotation).multiplyScalar(scl*(1-q));p.position.sub(off);p.position.y-=0.06*(this._rs||1)*(1-q);}if(isSel&&q>0.5)p.position.addScaledVector(V3(0,0,1),0.3+Math.sin(t*4)*0.05);
         const inn=q>0.98;if(inn)done++;s.led.material.color.set(inn?'#2B6BF0':'#8C939C');if(isSel)s.led.material.color.set(Math.sin(t*8)>0?'#2B6BF0':'#FBFBF8');});
       this._done=done;
       const heal=sm((A-0.86)/0.1);crack.visible=heal<0.99;crack.scale.setScalar(1);stitches.forEach((st,i)=>{st.scale.setScalar(Math.max(0.001,sm(heal*1.4-i*0.1)));});
@@ -211,7 +211,8 @@ class Component extends DCLogic {
       wL:`transform-box:fill-box;transform-origin:center;transform:translate(${(-34*e).toFixed(1)}px,${(10*e).toFixed(1)}px) rotate(${(-2.2*e).toFixed(2)}deg);transition:transform .2s linear`,
       wR:`transform-box:fill-box;transform-origin:center;transform:translate(${(34*e).toFixed(1)}px,${(-10*e).toFixed(1)}px) rotate(${(2*e).toFixed(2)}deg);transition:transform .2s linear`,
       canvasStyle:`position:absolute;left:0;top:0;width:1440px;height:${(HH-40).toFixed(0)}px;pointer-events:auto;filter:url(#wob3);z-index:2`,
-      toggleAsm:()=>{this._tA=(this._tA||0)>0.5?0:1;this._sel=-1;this.setState({tgt:this._tA,pop:false});},
+      toggleAsm:()=>{if(this._insp)return;this._tA=(this._tA||0)>0.5?0:1;this._sel=-1;this.setState({tgt:this._tA,pop:false});},
+      showAsm:!s.insp,
       asmLabel:(s.tgt||0)>0.5?(a<0.995?'Собирается…':'Разобрать обратно'):(a>0.005?'Разбирается…':'Начать сборку'),
       toggleInsp:()=>{this._insp=this._insp?0:1;if(!this._insp){this._sel=-1;}this.setState({insp:this._insp,pop:this._insp?s.pop:false});},
       inspLabel:s.insp?'Закрыть':'Заглянуть внутрь',

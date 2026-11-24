@@ -12,6 +12,11 @@ a{color:#121212}a:hover{color:#2457C9}
 .sk{position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:11px;padding:13px 20px 13px 14px;font-family:'Rubik','Arial Black',sans-serif;font-weight:800;font-size:16px;color:#121212!important;text-decoration:none;letter-spacing:-0.01em;min-height:46px;transition:transform .15s;cursor:pointer}
 .sk .bg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;z-index:-1}.sk .shd{transition:transform .15s}
 .sk:hover{transform:translate(3px,3px)}.sk:hover .shd{transform:translate(-3px,-3px)}.sk:active{transform:translate(6px,6px)}.sk:active .shd{transform:translate(-6px,-7px)}
+.sk .bg rect:nth-child(2){transition:fill .18s}.sk:hover .bg rect:nth-child(2)[fill="#A9C7F1"]{fill:#86B2EE}.sk:hover .bg rect:nth-child(2)[fill="#FBFBF8"]{fill:#A9C7F1}
+.sk:active .bg rect:nth-child(2){fill:#2B6BF0!important}.sk:active{color:#FBFBF8!important}.sk:active .ar path{stroke:#FBFBF8}
+.sk>span{display:inline-block}.sk:hover>span{animation:skboil .43s steps(1) infinite}
+@keyframes skboil{0%{transform:rotate(-1.6deg) translateY(0)}33%{transform:rotate(1.2deg) translateY(-1px)}66%{transform:rotate(-.4deg) translate(1px,1px)}}
+@media (prefers-reduced-motion:reduce){.sk:hover>span{animation:none}}
 .sk .scr,.sk .ar{transition:transform .3s}.sk:hover .scr{transform:rotate(90deg)}.sk:hover .ar{transform:translateX(4px)}
 @keyframes beatw{0%,45%,100%{transform:scale(1)}8%{transform:scale(1.035)}16%{transform:scale(.995)}26%{transform:scale(1.022)}}.beatw{transform-origin:12% 70%;animation:beatw 1.5s ease-in-out infinite}
 @keyframes crk{0%,100%{stroke-dashoffset:0}50%{stroke-dashoffset:30}}.crk{stroke-dasharray:180 14;animation:crk 3s ease-in-out infinite}
