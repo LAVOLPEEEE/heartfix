@@ -1,126 +1,171 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>heartfix — ремкомплект для разбитого сердца</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>heartfix HF-01 — ремкомплект для разбитого сердца</title>
+<meta name="description" content="heartfix HF-01 — ремкомплект для разбитого сердца: 26 деталей на 26 дней.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Rubik:wght@400;500;700;800;900&family=Pixelify+Sans:wght@400;600&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Inter+Tight:wght@400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="page">
-  <div class="container">
+<div id="app">
+<div id="hf-root" style="background:#A9C7F1;color:#121212;font-family:'Rubik',system-ui,sans-serif;font-size:15px;line-height:1.45;position:relative">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><pattern id="hatchB" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 V6" stroke="#121212" stroke-width="1.6"/></pattern><pattern id="hatchW" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 V6" stroke="#FBFBF8" stroke-width="1.6"/></pattern><filter id="wobB" x="-10%" y="-30%" width="120%" height="160%"><feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter><filter id="wobC" x="-10%" y="-30%" width="120%" height="160%"><feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="2" seed="11"/><feDisplacementMap in="SourceGraphic" scale="4"/></filter></defs></svg>
 
-    <header class="header">
-      <a href="index.html" class="logo">heartfix<sup>®</sup></a>
-      <a href="order.html" class="btn btn--outline">Заказать HF-01</a>
-    </header>
+<svg style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60;mix-blend-mode:multiply;opacity:.13" aria-hidden="true"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 0"/></filter><rect width="100%" height="100%" filter="url(#grain)"/></svg>
 
-    <main class="hero">
-
-      <!-- текст -->
-      <div class="hero__text">
-        <p class="eyebrow">ремкомплект для сердца · модель HF-01</p>
-
-        <h1 class="title">Разбилось?<br>Соберём!</h1>
-
-        <p class="lead">26 деталей — от винта «время» до клея «прощение». По одной в день, и через месяц сердце снова бьётся ровно.</p>
-
-        <div class="progress">
-          <div class="progress__head"><span>прогресс сборки</span><span>0 / 26</span></div>
-          <div class="progress__bar" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-          </div>
-          <p class="progress__note">Быстрее нельзя: винт «время» не ускоряется. Написали бывшему — минус три детали.</p>
-        </div>
-
-        <div class="passport">
-          <div class="passport__row">
-            <div>комплект № 0001</div>
-            <div>состояние: разбито (временно)</div>
-          </div>
-          <div class="passport__bar"><span>лаборатория heartfix</span><em>approval complete</em></div>
-        </div>
-
-        <div class="actions">
-          <a href="order.html" class="btn btn--primary">Получить набор <span aria-hidden="true">→</span></a>
-          <a href="order.html?gift=1" class="btn btn--secondary">
-            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="#111" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M2 9h20M12 9v12M12 9c-2-4-7-5-7-1.5S10 9 12 9zM12 9c2-4 7-5 7-1.5S14 9 12 9z"/></g></svg>
-            Подарить подруге
-          </a>
-        </div>
-
-        <p class="hint">по кнопке — коробка с 26 деталями и инструкцией, доставка 2–3 дня.<br>деталь №03 ставит подруга — та, что подарила набор или прислала ссылку.</p>
-      </div>
-
-      <!-- картинка -->
-      <div class="hero__visual">
-        <div class="collage">
-
-          <!-- выноски, рамка выделения, звёзды -->
-          <svg class="collage__lines" viewBox="0 0 760 620" aria-hidden="true">
-            <g fill="none" stroke="#111" stroke-width="1" stroke-dasharray="3 3">
-              <path d="M190 112 L296 148"/>
-              <path d="M572 104 L464 148"/>
-              <path d="M150 446 L275 352"/>
-              <path d="M600 446 L465 352"/>
-            </g>
-            <g fill="#111">
-              <circle cx="296" cy="148" r="3.5"/>
-              <circle cx="464" cy="148" r="3.5"/>
-              <circle cx="275" cy="352" r="3.5"/>
-              <circle cx="465" cy="352" r="3.5"/>
-            </g>
-            <rect x="160" y="108" width="440" height="356" fill="none" stroke="#4F86E3" stroke-width="1.4"/>
-            <g fill="#fff" stroke="#4F86E3" stroke-width="1.4">
-              <rect x="156" y="104" width="8" height="8"/>
-              <rect x="596" y="104" width="8" height="8"/>
-              <rect x="156" y="460" width="8" height="8"/>
-              <rect x="596" y="460" width="8" height="8"/>
-            </g>
-            <g fill="none" stroke="#B9C4D4" stroke-width="1.3" stroke-linejoin="round">
-              <path transform="translate(660 230)" d="M12 1.5l3.1 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.3l-6.4 3.6 1.5-7.1L1.7 8.9l7.2-.8z"/>
-              <path transform="translate(60 260)" d="M12 1.5l3.1 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.3l-6.4 3.6 1.5-7.1L1.7 8.9l7.2-.8z"/>
-            </g>
-          </svg>
-
-          <!-- сердце -->
-          <svg class="collage__heart" viewBox="-20 0 440 350" role="img" aria-label="Сердце, расколотое на две половины, с шестерёнками внутри">
-            <g transform="translate(-24 6) rotate(-6 120 180)">
-              <path d="M200 72 C180 42 150 20 112 20 C62 20 20 55 20 110 C20 180 80 250 200 330 L212 262 L190 212 L216 160 L186 118 Z" fill="#fff" stroke="#111" stroke-width="2.2" stroke-linejoin="round"/>
-              <g transform="translate(105 115)">
-                <circle r="34" fill="none" stroke="#111" stroke-width="10" stroke-dasharray="6 5.4"/>
-                <circle r="29" fill="#fff" stroke="#111" stroke-width="1.6"/>
-                <circle r="11" fill="#A9C6F3" stroke="#111" stroke-width="1.6"/>
-              </g>
-            </g>
-            <g transform="translate(24 -8) rotate(5 280 170)">
-              <path d="M200 72 C220 42 250 20 288 20 C338 20 380 55 380 110 C380 180 320 250 200 330 L212 262 L190 212 L216 160 L186 118 Z" fill="#A9C6F3" stroke="#111" stroke-width="2.2" stroke-linejoin="round"/>
-              <g transform="translate(292 112)">
-                <circle r="27" fill="none" stroke="#111" stroke-width="9" stroke-dasharray="5 4.6"/>
-                <circle r="22" fill="#fff" stroke="#111" stroke-width="1.6"/>
-                <circle r="7" fill="#111"/>
-              </g>
-            </g>
-          </svg>
-
-          <div class="tag" aria-hidden="true">ТРЕБУЕТ СБОРКИ<i></i><i></i><i></i><i></i></div>
-
-          <div class="label label--01"><span class="label__num">01</span><span>винт «время» · 1 в день</span></div>
-          <div class="label label--02"><span class="label__num">02</span><span>клей «прощение»</span></div>
-          <div class="label label--03"><span class="label__num">03</span><span>подруги в 2 ночи · ставит подруга</span></div>
-          <div class="label label--04"><span class="label__num">04</span><span>запасная улыбка</span></div>
-
-          <div class="kit" aria-hidden="true">
-            <svg viewBox="0 0 64 56"><path d="M6 18 32 8l26 10v28L32 54 6 46z" fill="#fff" stroke="#111" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 18l26 10 26-10M32 28v26" fill="none" stroke="#111" stroke-width="1.8" stroke-linejoin="round"/><path d="M19 13l26 10v8" fill="none" stroke="#111" stroke-width="1.6"/><path d="M14 34c0-3 5-3 5 0 0-3 5-3 5 0 0 3-5 6-5 6s-5-3-5-6z" fill="#A9C6F3" stroke="#111" stroke-width="1.2"/></svg>
-            <span>в коробке: 26 деталей<br>+ инструкция HF-01</span>
-          </div>
-
-        </div>
-      </div>
-
-    </main>
-  </div>
+<div class="wheel" data-bt-style="[[wheelBox]]">
+<div style="position:absolute;left:-88px;top:102px;width:176px;height:176px;border-radius:50%;border:1.5px solid #121212;background:#FBFBF8"></div>
+<div class="dg" style="position:absolute;left:0;top:102px;width:88px;height:176px;display:flex;align-items:center;justify-content:center;font-size:38px;letter-spacing:-0.03em"><span data-text="curNum"></span></div>
+<template data-for="wheel" data-as="w"><a class="wl" data-bt-href="[[w.href]]" data-bt-style="[[w.style]]"><span data-text="w.label"></span></a></template>
 </div>
+
+<div>
+
+<header style="position:sticky;top:0;z-index:40;background:#121212;color:#FBFBF8;height:56px">
+<div style="max-width:1360px;margin:0 auto;padding:0 32px;height:56px;display:flex;align-items:center;gap:28px" class="mono">
+<a href="#ch-00" class="dg" style="color:#FBFBF8;font-size:19px;text-decoration:none;letter-spacing:-0.02em">heartfix<sup style="font-size:8px">®</sup></a>
+<nav style="display:flex;gap:22px;flex-wrap:wrap;flex:1;font-size:12px;text-transform:uppercase">
+<a href="#ch-01" style="color:#FBFBF8;text-decoration:none">Поломка</a><a href="#ch-01" style="color:#FBFBF8;text-decoration:none">Комплект</a><a href="#ch-01" style="color:#FBFBF8;text-decoration:none">Модули</a><a href="#ch-01" style="color:#FBFBF8;text-decoration:none">Сборка</a><a href="#ch-01" style="color:#FBFBF8;text-decoration:none">Инструкция</a>
+</nav>
+<a href="#ch-00" class="sk" style="padding:7px 16px 7px 12px;font-size:14px;min-height:38px;gap:9px"><svg class="bg" aria-hidden="true"><rect class="shd" x="6" y="7" width="100%" height="100%" fill="url(#hatchW)"/><rect x="0" y="0" width="100%" height="100%" fill="#A9C7F1" stroke="#121212" stroke-width="2.2" filter="url(#wobB)"/><rect x="-2" y="2" width="100%" height="100%" fill="none" stroke="#121212" stroke-width="1" opacity=".45" filter="url(#wobC)"/></svg><svg class="scr" viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="#FBFBF8" stroke="#121212" stroke-width="1.8"/><path d="M6.5 6.5 L13.5 13.5 M13.5 6.5 L6.5 13.5" stroke="#121212" stroke-width="1.8" stroke-linecap="round"/></svg><span>Купить</span><svg class="ar" viewBox="0 0 26 14" width="24" height="13" aria-hidden="true"><path d="M1 7 C8 6 15 8 23 7 M17 2 L24 7 L17 12" fill="none" stroke="#121212" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+</header>
+
+<section id="ch-00" data-bt-style="[[heroStyle]]">
+<div data-bt-style="[[stageStyle]]">
+<div data-bt-style="[[boxStyle]]">
+<div data-bt-style="[[sheetStyle]]">
+<div style="position:absolute;inset:0;background:radial-gradient(ellipse 30% 52% at 53% 50%,rgba(169,199,241,.35),rgba(169,199,241,0) 100%);pointer-events:none" aria-hidden="true"></div>
+<div style="position:absolute;inset:0;background-image:radial-gradient(rgba(110,159,230,.3) 1px,transparent 1.3px);background-size:10px 10px;-webkit-mask-image:radial-gradient(ellipse 26% 42% at 53% 48%,#000,transparent);mask-image:radial-gradient(ellipse 26% 42% at 53% 48%,#000,transparent);pointer-events:none" aria-hidden="true"></div>
+
+
+
+
+<div style="position:absolute;inset:0;background:radial-gradient(ellipse 26% 44% at 53% 48%,rgba(251,251,248,1) 0%,rgba(251,251,248,.9) 50%,rgba(251,251,248,0) 100%);pointer-events:none;z-index:1" aria-hidden="true"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="wob3"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="4"/></filter></svg>
+<canvas id="hf3d" role="img" aria-label="3D-модель сердца heartfix в стиле карандашного скетча: при прокрутке части и детали собираются в целое сердце" data-bt-style="[[canvasStyle]]"></canvas>
+
+
+<div data-bt-style="[[leftStyle]]">
+<svg class="beatw" viewBox="0 0 430 104" style="display:block;width:340px;height:82px;overflow:visible;margin-left:-3px" role="img" aria-label="heartfix">
+<defs><filter id="boil" x="-6%" y="-25%" width="112%" height="150%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="1"><animate attributeName="seed" values="1;4;7;2;9" dur=".72s" calcMode="discrete" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" scale="3"/></filter></defs>
+<g filter="url(#boil)">
+<text x="6" y="92" textLength="388" lengthAdjust="spacingAndGlyphs" font-family="Rubik" font-weight="900" font-size="104" fill="#A9C7F1">heartfix</text>
+<text x="0" y="86" textLength="388" lengthAdjust="spacingAndGlyphs" font-family="Rubik" font-weight="900" font-size="104" fill="#121212">heartfix</text>
+<text x="396" y="34" font-family="Rubik" font-weight="700" font-size="22" fill="#121212">®</text>
+</g>
+</svg>
+<h1 style="margin:18px 0 0;font-family:'Rubik',sans-serif;font-weight:700;font-size:27px;line-height:1.12;letter-spacing:-0.02em">Ремкомплект для&nbsp;разбитого сердца</h1>
+<p style="margin:12px 0 0;font-family:'Rubik',sans-serif;font-weight:400;font-size:15px;line-height:1.5;color:#2A2A28;max-width:380px">26 деталей на&nbsp;26&nbsp;дней&nbsp;— от&nbsp;«плейлиста для&nbsp;слёз» до&nbsp;«мыслей о&nbsp;будущем». Ставишь по&nbsp;одной в&nbsp;день, и&nbsp;сердце снова собирается целым.</p>
+<div style="margin-top:28px;display:flex;flex-direction:column;align-items:flex-start;gap:12px"><div style="display:flex;gap:18px;align-items:center"><a href="#ch-01" class="sk" style="font-size:17px;padding:13px 22px 13px 15px;gap:11px"><svg class="bg" aria-hidden="true"><rect class="shd" x="6" y="7" width="100%" height="100%" fill="url(#hatchB)"/><rect x="0" y="0" width="100%" height="100%" fill="#A9C7F1" stroke="#121212" stroke-width="2.2" filter="url(#wobB)"/><rect x="-2" y="2" width="100%" height="100%" fill="none" stroke="#121212" stroke-width="1" opacity=".45" filter="url(#wobC)"/></svg><svg class="scr" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="#FBFBF8" stroke="#121212" stroke-width="1.8"/><path d="M6.5 6.5 L13.5 13.5 M13.5 6.5 L6.5 13.5" stroke="#121212" stroke-width="1.8" stroke-linecap="round"/></svg><span>Купить</span><svg class="ar" viewBox="0 0 26 14" width="24" height="13" aria-hidden="true"><path d="M1 7 C8 6 15 8 23 7 M17 2 L24 7 L17 12" fill="none" stroke="#121212" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a href="#ch-10" class="sk" style="font-size:17px;padding:16px 20px 16px 16px;gap:11px"><svg class="bg" aria-hidden="true"><rect class="shd" x="6" y="7" width="100%" height="100%" fill="url(#hatchB)"/><rect x="0" y="0" width="100%" height="100%" fill="#FBFBF8" stroke="#121212" stroke-width="2.2" filter="url(#wobB)"/><rect x="-2" y="2" width="100%" height="100%" fill="none" stroke="#121212" stroke-width="1" opacity=".45" filter="url(#wobC)"/></svg><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#121212" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="3" y="9" width="18" height="12" fill="#A9C7F1"/><rect x="2" y="6" width="20" height="4" fill="#FBFBF8"/><path d="M12 6 V21"/><path d="M12 6 C9 1 4 3 7 6 M12 6 C15 1 20 3 17 6"/></svg><span>В&nbsp;подарок</span></a></div><span class="mono" style="font-size:10.5px;color:#4C4C47">или нажми на&nbsp;любую деталь в&nbsp;ячейках справа</span></div>
+</div>
+
+<div data-bt-style="[[barPos]]">
+<div style="display:flex;flex-direction:column;gap:2px;min-width:84px"><span class="mono" style="font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:#4C4C47">пульт · HF-01</span><span style="font-family:'Rubik',sans-serif;font-weight:900;font-size:30px;line-height:1;letter-spacing:-0.03em"><span data-text="pct"></span></span></div>
+<div style="display:flex;flex-direction:column;gap:6px;padding-left:14px;border-left:1.3px solid #121212"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span class="mono" data-bt-style="[[stWord]];font-size:10px"><span data-text="status"></span></span><span class="mono" style="font-size:10px"><span data-text="count"></span>/26</span></div><div style="display:flex;gap:2px"><template data-for="segs" data-as="g"><span data-bt-style="[[g]]"></span></template></div></div>
+<div style="display:flex;gap:14px;padding-left:6px"><button class="sk" data-bt-onclick="[[toggleAsm]]" style="border:0;background:none;font-size:13px;padding:8px 12px 8px 10px;min-height:42px;white-space:nowrap;"><svg class="bg" aria-hidden="true"><rect class="shd" x="5" y="6" width="100%" height="100%" fill="url(#hatchB)"/><rect x="0" y="0" width="100%" height="100%" fill="#A9C7F1" stroke="#121212" stroke-width="2" filter="url(#wobB)"/><rect x="-2" y="2" width="100%" height="100%" fill="none" stroke="#121212" stroke-width="1" opacity=".45" filter="url(#wobC)"/></svg><svg class="scr" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="#FBFBF8" stroke="#121212" stroke-width="1.8"/><path d="M6.5 6.5 L13.5 13.5 M13.5 6.5 L6.5 13.5" stroke="#121212" stroke-width="1.8" stroke-linecap="round"/></svg><span><span data-text="asmLabel"></span></span></button><button class="sk" data-bt-onclick="[[toggleInsp]]" style="border:0;background:none;font-size:13px;padding:8px 12px 8px 10px;min-height:42px;white-space:nowrap;"><svg class="bg" aria-hidden="true"><rect class="shd" x="5" y="6" width="100%" height="100%" fill="url(#hatchB)"/><rect x="0" y="0" width="100%" height="100%" fill="#FBFBF8" stroke="#121212" stroke-width="2" filter="url(#wobB)"/><rect x="-2" y="2" width="100%" height="100%" fill="none" stroke="#121212" stroke-width="1" opacity=".45" filter="url(#wobC)"/></svg><svg class="scr" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="#FBFBF8" stroke="#121212" stroke-width="1.8"/><path d="M6.5 6.5 L13.5 13.5 M13.5 6.5 L6.5 13.5" stroke="#121212" stroke-width="1.8" stroke-linecap="round"/></svg><span><span data-text="inspLabel"></span></span></button></div>
+</div>
+
+<div data-bt-style="[[popStyle]]" role="dialog" data-bt-aria-label="Деталь [[sel.n]]">
+<div style="display:flex;justify-content:space-between;align-items:center;background:#A9C7F1;border-bottom:1.5px solid #121212;padding:5px 6px 5px 12px">
+<span class="mono" style="font-size:11px;letter-spacing:.04em">heartfix.exe — деталь <span data-text="sel.n"></span></span>
+<button data-bt-onclick="[[closePop]]" aria-label="Закрыть окно" style="width:30px;height:30px;border:1.5px solid #121212;background:#FBFBF8;font-family:'IBM Plex Mono',monospace;font-size:15px;line-height:1;cursor:pointer;color:#121212">✕</button>
+</div>
+<div style="position:relative;height:230px;background:#F1F4FA;background-image:linear-gradient(#DCE5F3 1px,transparent 1px),linear-gradient(90deg,#DCE5F3 1px,transparent 1px);background-size:16px 16px;border-bottom:1.5px solid #121212">
+<canvas id="hfPart" role="img" data-bt-aria-label="[[sel.name]]" style="position:absolute;inset:0;width:100%;height:100%;filter:url(#wob3)"></canvas>
+<span class="mono" style="position:absolute;left:10px;bottom:8px;font-size:10px;color:#4C4C47">fig. <span data-text="sel.n"></span></span>
+</div>
+<div style="padding:14px 16px 16px">
+<div style="font-family:'Rubik',sans-serif;font-weight:800;font-size:24px;line-height:1.08;letter-spacing:-0.02em"><span data-text="sel.name"></span></div>
+<p style="margin:8px 0 0;font-family:'Rubik',sans-serif;font-size:15px;line-height:1.45"><span data-text="sel.does"></span></p>
+<div class="mono" style="margin-top:10px;font-size:11px;color:#4C4C47">→ <span data-text="sel.note"></span></div>
+</div>
+</div>
+
+<div style="position:absolute;left:0;right:0;bottom:0;height:40px;background:#121212;overflow:hidden;z-index:5" aria-hidden="true">
+<div class="tick mono" style="display:flex;gap:36px;white-space:nowrap;color:#FBFBF8;font-size:12.5px;line-height:40px;width:max-content">
+<template data-for="ticker" data-as="m"><span><span style="color:#A9C7F1"><span data-text="m.n"></span></span> <span data-text="m.t"></span></span></template>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="ch-01" data-bt-style="[[c1Section]]">
+<div style="position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(180deg,rgba(169,199,241,0),#C8DCF8);pointer-events:none" aria-hidden="true"></div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:30%;background-image:radial-gradient(#86B2EE 1px,transparent 1.3px);background-size:9px 9px;opacity:.35;pointer-events:none" aria-hidden="true"></div>
+<div data-bt-style="[[c1Box]]">
+<div data-bt-style="[[c1Inner]]">
+
+<div data-rv="t" data-bt-class="[[rvT]]" style="position:absolute;left:22px;top:34px;padding:4px 26px 8px;background:#CFE0F9">
+<span style="position:absolute;left:0;top:-10px;bottom:-12px;width:3px;background:#86B2EE" aria-hidden="true"></span><span style="position:absolute;left:-9px;top:-20px;width:21px;height:21px;border-radius:50%;background:#86B2EE" aria-hidden="true"></span>
+<span style="position:absolute;right:0;top:-10px;bottom:-12px;width:3px;background:#86B2EE" aria-hidden="true"></span><span style="position:absolute;right:-9px;bottom:-22px;width:21px;height:21px;border-radius:50%;background:#86B2EE" aria-hidden="true"></span>
+<h2 class="px" style="margin:0;font-weight:600;font-size:78px;line-height:1;letter-spacing:-0.01em;white-space:nowrap">КРАК? КРАК! КРАК!</h2>
+</div>
+<div data-rv="s" data-bt-class="[[rvS]]" style="position:absolute;left:26px;top:150px;display:flex;align-items:center;gap:10px">
+<span style="width:18px;height:18px;border-radius:50%;background:#121212;color:#FBFBF8;display:flex;align-items:center;justify-content:center;font-size:11px" aria-hidden="true">›</span>
+<span style="text-decoration:underline;text-underline-offset:3px;font-size:16px">Сердце разбивается по-разному. Ищем, где именно треснуло.</span>
+</div>
+
+<div style="position:absolute;left:930px;top:44px;border:1.5px solid #121212;padding:5px 14px;background:#FBFBF8" aria-hidden="true"><span class="dg" style="font-size:20px">BROKEN</span><span style="position:absolute;left:-5px;top:-5px;width:8px;height:8px;border:1.4px solid #121212;background:#FBFBF8"></span><span style="position:absolute;right:-5px;top:-5px;width:8px;height:8px;border:1.4px solid #121212;background:#FBFBF8"></span><span style="position:absolute;left:-5px;bottom:-5px;width:8px;height:8px;border:1.4px solid #121212;background:#FBFBF8"></span><span style="position:absolute;right:-5px;bottom:-5px;width:8px;height:8px;border:1.4px solid #121212;background:#FBFBF8"></span></div>
+<div style="position:absolute;left:1210px;top:24px;display:flex;flex-direction:column;align-items:center;gap:6px" aria-hidden="true"><svg viewBox="0 0 60 50" width="72" height="60"><path d="M30 2 L58 26 H46 V48 H14 V26 H2 Z" fill="#86B2EE"/><text x="30" y="41" text-anchor="middle" font-family="Dela Gothic One" font-size="16" fill="#FBFBF8">HF</text></svg><span class="mono" style="font-size:12px">/MY HEART/</span></div>
+
+<div class="px" style="position:absolute;left:690px;top:520px;display:flex;flex-direction:column;align-items:flex-start;gap:3px;font-size:19px;color:#FBFBF8" aria-hidden="true"><span style="background:#C9C9C4;padding:2px 8px">Find</span><span style="background:#C9C9C4;padding:2px 8px;margin-left:28px">The</span><span style="background:#C9C9C4;padding:2px 8px;margin-left:4px;margin-top:22px">Crack</span></div>
+<svg viewBox="0 0 60 28" width="62" height="29" style="position:absolute;left:296px;top:436px" aria-hidden="true"><path d="M4 2 L4 22 L9 17 L13 25 L16 24 L12 16 L19 16 Z" fill="#FBFBF8" stroke="#121212" stroke-width="1.4"/><path d="M30 3h14M30 25h14M31 3c0 6 12 6 12 11s-12 5-12 11M43 3c0 6-12 6-12 11" stroke="#121212" stroke-width="1.6" fill="none"/></svg>
+<svg viewBox="0 0 120 20" width="110" height="20" style="position:absolute;left:584px;top:200px" aria-hidden="true"><path d="M0 16 L10 4 L20 16 L30 4 L40 16 L50 4 L60 16 L70 4 L80 16 L90 4 L100 16 L110 4 L120 16" fill="none" stroke="#86B2EE" stroke-width="2.6" stroke-dasharray="1 4.5" stroke-linecap="round"/></svg>
+<svg viewBox="0 0 24 24" width="30" height="30" style="position:absolute;left:944px;top:640px" fill="none" stroke="#121212" stroke-width="1.6" aria-hidden="true"><path d="M12 2v20M2 12h20M12 2l-3 3M12 2l3 3M12 22l-3-3M12 22l3-3M2 12l3-3M2 12l3 3M22 12l-3-3M22 12l-3 3"/></svg>
+<svg viewBox="0 0 40 30" width="56" height="42" style="position:absolute;left:880px;top:530px" aria-hidden="true"><path d="M2 6 C2 4 3 3 5 3 H15 L18 6 H35 C37 6 38 7 38 9 V25 C38 27 37 28 35 28 H5 C3 28 2 27 2 25 Z" fill="#86B2EE"/><path d="M2 11 H38" stroke="#6E9FE6"/></svg>
+<svg viewBox="0 0 24 24" width="24" height="24" style="position:absolute;left:640px;top:120px" fill="none" stroke="#B5BBC5" stroke-width="1.2" aria-hidden="true"><path d="M12 2l3 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18l-6.3 3.5 1.4-7.1L1.8 9.5 9 8.6z"/></svg>
+<svg viewBox="0 0 24 24" width="26" height="26" style="position:absolute;left:970px;top:330px" fill="none" stroke="#B5BBC5" stroke-width="1.2" aria-hidden="true"><path d="M12 2l3 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18l-6.3 3.5 1.4-7.1L1.8 9.5 9 8.6z"/></svg>
+<svg viewBox="0 0 24 24" width="20" height="20" style="position:absolute;left:1310px;top:370px" fill="none" stroke="#B5BBC5" stroke-width="1.2" aria-hidden="true"><path d="M12 2l3 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18l-6.3 3.5 1.4-7.1L1.8 9.5 9 8.6z"/></svg>
+<svg viewBox="0 0 24 24" width="22" height="22" style="position:absolute;left:330px;top:640px" fill="none" stroke="#B5BBC5" stroke-width="1.2" aria-hidden="true"><path d="M12 2l3 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18l-6.3 3.5 1.4-7.1L1.8 9.5 9 8.6z"/></svg>
+
+<template data-for="objs" data-as="o">
+<button data-bt-data-rv="[[o.key]]" data-bt-class="[[o.cls]]" data-bt-onclick="[[o.pick]]" data-bt-aria-pressed="[[o.sel]]" data-bt-aria-label="[[o.aria]]" data-bt-style="[[o.style]]">
+<div style="position:relative">
+<template data-if="o.is1"><svg viewBox="0 0 220 170" style="width:100%;height:auto;display:block" fill="none" stroke="#121212" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><g filter="url(#wob)"><path d="M70 30 C70 18 80 10 88 14 M88 14 C96 18 94 30 84 32" stroke-width="2.4"/><ellipse cx="84" cy="44" rx="8" ry="10" fill="#FBFBF8"/><path d="M96 70 C90 58 80 52 68 52 C50 52 36 66 36 84 C36 112 66 134 96 154 L90 132 L102 112 L88 94 Z" fill="#FBFBF8"/><path d="M42 92 C46 120 70 136 92 148 L88 132 L96 116 Z" fill="url(#ht)" stroke="none" opacity=".5"/><path d="M50 72 C56 62 66 58 76 60" stroke="#FBFBF8" stroke-width="5"/><g transform="translate(26,-14) rotate(10 150 100)"><path d="M118 52 C130 50 138 44 140 36 M140 36 C142 26 154 24 156 34" stroke-width="2.4"/><ellipse cx="150" cy="44" rx="8" ry="10" fill="#FBFBF8"/><path d="M128 70 C134 58 144 52 156 52 C174 52 188 66 188 84 C188 112 158 134 128 154 L122 132 L134 112 L120 94 Z" fill="#CFE0F9"/></g><path d="M100 104 L110 98 M104 120 L114 122 M98 86 L108 80" stroke-width="1.4"/></g></svg></template>
+<template data-if="o.is2"><svg viewBox="0 0 220 170" style="width:100%;height:auto;display:block" fill="none" stroke="#121212" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><g filter="url(#wob)"><path d="M186 92 C190 60 150 40 110 40 C64 40 28 62 30 92 C32 120 66 136 110 136 C140 136 166 128 178 114" stroke-width="2.4"/><path d="M182 104 L194 98 M180 112 L192 116" stroke-width="1.4"/><circle cx="34" cy="70" r="9" fill="#CFE0F9"/><circle cx="31" cy="100" r="9" fill="#FBFBF8"/><circle cx="50" cy="124" r="9" fill="#CFE0F9"/><circle cx="80" cy="134" r="9" fill="#FBFBF8"/><circle cx="140" cy="134" r="9" fill="#CFE0F9"/><circle cx="166" cy="124" r="9" fill="#FBFBF8"/><circle cx="176" cy="60" r="9" fill="#CFE0F9"/><rect x="52" y="36" width="20" height="20" fill="#FBFBF8"/><rect x="88" y="30" width="20" height="20" fill="#FBFBF8"/><rect x="124" y="32" width="20" height="20" fill="#FBFBF8"/><text x="57" y="51" font-family="Pixelify Sans" font-size="15" fill="#121212" stroke="none">B</text><text x="94" y="45" font-family="Pixelify Sans" font-size="15" fill="#121212" stroke="none">F</text><text x="130" y="47" font-family="Pixelify Sans" font-size="15" fill="#121212" stroke="none">F</text><circle cx="110" cy="136" r="9" fill="url(#ht)"/></g></svg></template>
+<template data-if="o.is3"><svg viewBox="0 0 220 170" style="width:100%;height:auto;display:block" fill="none" stroke="#121212" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><g filter="url(#wob)"><rect x="40" y="14" width="110" height="142" fill="#FBFBF8"/><rect x="54" y="28" width="82" height="102" fill="#E4ECF8"/><path d="M54 110 C76 96 92 104 110 92 C120 86 128 90 136 86" stroke-width="1.2"/><circle cx="96" cy="66" r="16" stroke-width="1.2" stroke-dasharray="2 3"/><path d="M80 142 H110" stroke-width="1.2"/><rect x="164" y="108" width="20" height="48" fill="#FBFBF8"/><path d="M174 108 V100"/><path d="M174 78 C182 88 180 98 174 98 C168 98 166 88 174 78 Z" fill="#CFE0F9"/><path d="M164 120 Q170 128 174 120" stroke-width="1.2"/></g></svg></template>
+<template data-if="o.is4"><svg viewBox="0 0 220 170" style="width:100%;height:auto;display:block" fill="none" stroke="#121212" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><g filter="url(#wob)"><ellipse cx="110" cy="60" rx="86" ry="38" fill="#CFE0F9"/><ellipse cx="110" cy="58" rx="72" ry="26" fill="#FBFBF8"/><path d="M38 74 C40 86 70 98 110 98 C150 98 180 86 182 74" stroke-width="1.2" stroke-dasharray="3 4"/><rect x="34" y="52" width="22" height="26" fill="#FBFBF8"/><path d="M40 58 V72 M50 58 V72" stroke-width="1.4"/><circle cx="110" cy="102" r="6" fill="#FBFBF8"/><path d="M96 122 a9 9 0 1 1 7 -12 h14 a9 9 0 1 1 7 12 a9 9 0 1 1 -7 12 h-14 a9 9 0 1 1 -7 -12 z" fill="url(#ht)"/><path d="M110 108 V112"/></g></svg></template>
+<template data-if="o.is5"><svg viewBox="0 0 220 170" style="width:100%;height:auto;display:block" fill="none" stroke="#121212" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><g filter="url(#wob)"><path d="M30 60 L110 34 L190 58 L110 84 Z" fill="#E7D9C1"/><path d="M30 60 V136 L110 162 V84 Z" fill="#F1E6D3"/><path d="M110 84 V162 L190 136 V58 Z" fill="#DCCBAE"/><path d="M70 47 L150 71 L150 82 L70 58 Z" fill="#CFE0F9" stroke-width="1.4"/><text x="40" y="112" font-family="Pixelify Sans" font-size="13" fill="#121212" stroke="none" transform="rotate(18 40 112)">ХРУПКОЕ</text><path d="M58 130 L64 120 H52 Z M58 130 V138 M53 138 H63" stroke-width="1.3" transform="rotate(18 58 130)"/><path d="M130 110 L170 98 M130 120 L162 110" stroke-width="1.2"/></g></svg></template>
+<template data-if="o.is6"><svg viewBox="0 0 220 170" style="width:100%;height:auto;display:block" fill="none" stroke="#121212" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><g filter="url(#wob)"><path d="M44 22 L120 12 L176 30 L168 70 L184 110 L150 152 L92 160 L40 140 L52 96 L34 60 Z" fill="#FBFBF8"/><path d="M120 12 L112 60 L168 70 M112 60 L52 96 M112 60 L150 152 M112 60 L92 160 M34 60 L112 60" stroke-width="1.1"/><path d="M112 60 L168 70 L184 110 L150 152 Z" fill="url(#ht)" stroke="none" opacity=".35"/><text x="54" y="44" font-family="IBM Plex Mono" font-size="9" fill="#121212" stroke="none" transform="rotate(-6 54 44)">к сожалению, вы</text><text x="54" y="56" font-family="IBM Plex Mono" font-size="9" fill="#121212" stroke="none" transform="rotate(-6 54 56)">не прошли...</text><path d="M60 80 H96 M58 90 H90 M64 110 L100 104 M66 122 L110 116" stroke-width="1"/></g></svg></template>
+<span class="hdl" style="position:absolute;inset:-6px;border:1.5px solid #5B92E6;pointer-events:none"></span><span class="hdl" style="position:absolute;left:-10px;top:-10px;width:9px;height:9px;background:#FBFBF8;border:1.5px solid #5B92E6"></span><span class="hdl" style="position:absolute;right:-10px;top:-10px;width:9px;height:9px;background:#FBFBF8;border:1.5px solid #5B92E6"></span><span class="hdl" style="position:absolute;left:-10px;bottom:-10px;width:9px;height:9px;background:#FBFBF8;border:1.5px solid #5B92E6"></span><span class="hdl" style="position:absolute;right:-10px;bottom:-10px;width:9px;height:9px;background:#FBFBF8;border:1.5px solid #5B92E6"></span>
+</div>
+<div style="display:flex;align-items:baseline;gap:8px;margin-top:12px"><span class="mono" style="background:#86B2EE;font-size:11px;padding:0 5px"><span data-text="o.n"></span>.</span><span style="font-size:14px"><span data-text="o.item"></span></span></div>
+<div class="mono" style="font-size:11px;color:#4C4C47;margin:2px 0 0 34px"><span data-text="o.sit"></span></div>
+</button>
+</template>
+
+<div style="position:absolute;left:1000px;top:420px;width:320px;border:1.5px solid #121212;background:#FBFBF8;box-shadow:5px 5px 0 #121212">
+<div class="px" style="display:flex;justify-content:space-between;align-items:center;background:#86B2EE;border-bottom:1.5px solid #121212;padding:3px 8px;font-size:14px"><span>heartfix.exe</span><span style="display:flex;gap:4px"><span style="width:10px;height:10px;border:1.3px solid #121212;background:#FBFBF8"></span><span style="width:10px;height:10px;border:1.3px solid #121212;background:#FBFBF8"></span></span></div>
+<div style="padding:12px 14px;display:flex;flex-direction:column;gap:7px">
+<div class="mono" style="font-size:10.5px;color:#4C4C47">ПОЛОМКА <span data-text="cur.n"></span> · <span data-text="cur.sit"></span></div>
+<div class="dg" style="font-size:19px;line-height:1.1">модуль <span data-text="cur.mod"></span></div>
+<div style="font-size:13.5px;line-height:1.35"><span data-text="cur.goal"></span></div>
+<div class="mono" style="font-size:10.5px;border-top:1px dashed #121212;padding-top:6px">деталь №26 · <span data-text="cur.fin"></span></div>
+</div>
+</div>
+<div class="mono" style="position:absolute;left:1000px;top:606px;font-size:11px;color:#4C4C47">← нажми на вещь, чтобы узнать модуль</div>
+
+<div data-rv="b" data-bt-class="[[rvB]]" style="position:absolute;left:22px;right:22px;top:690px;display:flex;justify-content:space-between;align-items:flex-end" aria-hidden="true">
+<span class="outl" style="font-family:'Rubik',sans-serif;font-weight:500;font-size:68px;line-height:1;letter-spacing:-0.04em">(26)</span>
+<span aria-hidden="true" class="sk" style="margin-bottom:10px;font-size:18px"><svg class="bg" aria-hidden="true"><rect class="shd" x="6" y="7" width="100%" height="100%" fill="url(#hatchB)"/><rect x="0" y="0" width="100%" height="100%" fill="#FBFBF8" stroke="#121212" stroke-width="2.2" filter="url(#wobB)"/><rect x="-2" y="2" width="100%" height="100%" fill="none" stroke="#121212" stroke-width="1" opacity=".45" filter="url(#wobC)"/></svg><svg class="scr" viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="#FBFBF8" stroke="#121212" stroke-width="1.8"/><path d="M6.5 6.5 L13.5 13.5 M13.5 6.5 L6.5 13.5" stroke="#121212" stroke-width="1.8" stroke-linecap="round"/></svg><span>Разбилось? Соберём!</span><svg class="ar" viewBox="0 0 26 14" width="24" height="13" aria-hidden="true"><path d="M1 7 C8 6 15 8 23 7 M17 2 L24 7 L17 12" fill="none" stroke="#121212" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+<span class="outl dg" style="font-size:62px;line-height:1;letter-spacing:-0.03em">SINCE 1st CRACK</span>
+</div>
+
+</div>
+</div>
+</section>
+
+</div>
+</div>
+</div>
+<script src="js/three.min.js"></script>
+<script src="js/binder.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
