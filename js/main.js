@@ -135,7 +135,7 @@ class Component extends DCLogic {
     P(g=>{const sh=new T.Shape([new T.Vector2(-0.4,0),new T.Vector2(0.42,0.22),new T.Vector2(0,-0.3)]);const geo=new T.ExtrudeGeometry(sh,{depth:0.04,bevelEnabled:false});mesh(geo,W,g,true);});
     const DOCK=[[-1.45,0.75,0.62,0.3],[-0.95,1.15,0.7,-0.2],[-0.4,0.95,0.86,0.4],[0.4,0.95,0.86,-0.3],[0.95,1.15,0.7,0.25],[1.45,0.75,0.62,-0.4],[-1.55,0.15,0.6,0.1],[-0.95,0.4,0.88,-0.15],[-0.35,0.25,0.95,0.2],[0.25,-0.25,0.95,-0.3],[-1.15,-0.45,0.72,0.35],[-0.5,-0.55,0.92,-0.1],[0.45,-0.7,0.9,0.3],[1.05,-0.55,0.7,-0.25],[-0.6,-1.15,0.74,0.15],[0.2,-1.35,0.7,-0.35]];
     parts.forEach((p,i)=>{p.userData.a=-Math.PI/2+i/parts.length*Math.PI*2;p.userData.z=(i%2?0.9:-0.3);p.userData.rx=0.3+((i*37)%10)/14;p.userData.ry=0.4+((i*53)%10)/12;p.userData.t0=0.12+i*0.036;});
-    const rack=new T.Group();scene.add(rack);const RX=[3.45,4.83],RY0=3.0,RS=0.94;
+    const rack=new T.Group();scene.add(cam);cam.add(rack);const RX=[3.45,4.83],RY0=3.0,RS=0.94;
     mesh(new T.BoxGeometry(2.86,8*RS+0.2,0.1),'#FBFBF8',rack,true,[4.14,RY0-3.5*RS,-0.62]);
     for(let r=0;r<=8;r++)mesh(new T.BoxGeometry(2.8,0.035,0.2),'#2A2A2E',rack,true,[4.14,RY0+RS/2-r*RS,-0.5]);
     mesh(new T.BoxGeometry(0.035,8*RS,0.2),'#2A2A2E',rack,true,[4.14,RY0-3.5*RS,-0.5]);
@@ -164,7 +164,7 @@ class Component extends DCLogic {
       root.rotation.y=(Math.sin(t*0.45)*0.4+this._mx*0.5)*(1-zoom*0.85);root.rotation.x=(Math.sin(t*0.33)*0.08+this._my*0.25)*(1-zoom*0.85);
       hinge.rotation.x=-1.95*open;
       port.updateMatrixWorld(true);port.getWorldPosition(pw);
-      const zr=sm((A-0.03)/0.1)*(1-sm((A-0.76)/0.12));const fx=0.35*zr*(1-ic)+ic;const dz=2.2*zr*(1-ic)+7.4*ic;cam.position.set(pw.x*fx,0.4+(pw.y-0.4)*fx,12.3-dz);look.set(pw.x*Math.max(0.6*zr,ic),pw.y*Math.max(0.6*zr,ic),0);cam.lookAt(look);{const hw=Math.tan(15*Math.PI/180)*cam.position.z*cam.aspect;const vh2=Math.tan(15*Math.PI/180)*cam.position.z*2;const rs=Math.min(1.05,vh2*0.86/7.75);rack.scale.setScalar(rs);this._rs=rs;rack.position.set((hw*0.9-5.57*rs)*(1-ic),0.45*rs,0);rack.updateMatrixWorld(true);}if(this._w){cam.setViewOffset(this._w,this._h,-0.035*this._w*(1-ic),0.02*this._h*(1-ic),this._w,this._h);cam.updateProjectionMatrix();}
+      const zr=sm((A-0.03)/0.1)*(1-sm((A-0.76)/0.12));const fx=0.35*zr*(1-ic)+ic;const dz=2.2*zr*(1-ic)+7.4*ic;cam.position.set(pw.x*fx,0.4+(pw.y-0.4)*fx,12.3-dz);look.set(pw.x*Math.max(0.6*zr,ic),pw.y*Math.max(0.6*zr,ic),0);cam.lookAt(look);{const hw=Math.tan(15*Math.PI/180)*12.3*cam.aspect;const vh2=Math.tan(15*Math.PI/180)*12.3*2;const rs=Math.min(1.05,vh2*0.86/7.75);rack.scale.setScalar(rs);this._rs=rs;rack.position.set(hw*0.9-5.57*rs+ic*hw*1.3,0.45*rs-0.4,-12.3);cam.updateMatrixWorld(true);}if(this._w){cam.setViewOffset(this._w,this._h,-0.035*this._w*(1-ic),0.02*this._h*(1-ic),this._w,this._h);cam.updateProjectionMatrix();}
       let done=0;
       parts.forEach((p,i)=>{const u=p.userData;const q=Math.max(sm((A-u.t0)/0.1),ic);const isSel=this._sel===i;
         const cw=CELL[i].clone();rack.localToWorld(cw);root.worldToLocal(cw);const ox=cw.x,oy=cw.y+Math.sin(t*1.6+i)*0.025,oz=cw.z;
