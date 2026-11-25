@@ -116,30 +116,103 @@ class Component extends DCLogic {
     for(let i=0;i<12;i++){const a=i/12*Math.PI*2;mesh(new T.BoxGeometry(0.05,0.18,0.05),'#2A0E0C',lid,true,[Math.cos(a)*RR*0.85,Math.sin(a)*RR*0.85,0.07],[0,0,a]);}
     mesh(new T.CylinderGeometry(0.06,0.06,RR*0.7,12),'#E9EDF3',hinge,true,[0,0,0],[0,0,Math.PI/2]);
     const parts=[];const P=(build,s)=>{const g=new T.Group();build(g);root.add(g);g.userData={s:s||1};parts.push(g);};
-    const W='#FBFBF8',B='#A9C7F1',D='#2A2A2E';
-    P(g=>{mesh(new T.CylinderGeometry(0.24,0.24,0.12,24),W,g,true,[0,0.34,0]);mesh(new T.CylinderGeometry(0.09,0.05,0.62,12),W,g,true,[0,0,0]);mesh(new T.BoxGeometry(0.3,0.03,0.04),D,g,true,[0,0.41,0]);});
-    P(g=>{mesh(new T.CylinderGeometry(0.16,0.16,0.62,20),B,g,true,[0,0,0],[0,0,Math.PI/2]);mesh(new T.ConeGeometry(0.1,0.22,12),D,g,true,[0.42,0,0],[0,0,-Math.PI/2]);});
-    P(g=>{mesh(new T.BoxGeometry(0.4,0.7,0.08),W,g,true);mesh(new T.BoxGeometry(0.3,0.5,0.02),B,g,true,[0,0.04,0.05]);});
-    P(g=>{mesh(new T.TorusGeometry(0.3,0.07,10,30,Math.PI),W,g,true,[0,0,0],[0,0,Math.PI]);});
-    P(g=>{mesh(new T.BoxGeometry(0.66,0.42,0.12),W,g,true);mesh(new T.CylinderGeometry(0.08,0.08,0.04,16),B,g,true,[-0.14,0.03,0.07],[Math.PI/2,0,0]);mesh(new T.CylinderGeometry(0.08,0.08,0.04,16),B,g,true,[0.14,0.03,0.07],[Math.PI/2,0,0]);});
-    P(g=>{mesh(new T.CylinderGeometry(0.22,0.22,0.66,24),B,g,false,[0,0,0],[0,0,Math.PI/2]);});
-    P(g=>{mesh(new T.SphereGeometry(0.17,20,14),B,g,true);mesh(new T.ConeGeometry(0.12,0.2,12),W,g,true,[-0.26,0,0],[0,0,-Math.PI/2]);mesh(new T.ConeGeometry(0.12,0.2,12),W,g,true,[0.26,0,0],[0,0,Math.PI/2]);});
-    P(g=>{mesh(new T.TorusGeometry(0.32,0.08,10,30,Math.PI),D,g,true);mesh(new T.BoxGeometry(0.2,0.12,0.16),W,g,true,[-0.32,-0.04,0]);mesh(new T.BoxGeometry(0.2,0.12,0.16),W,g,true,[0.32,-0.04,0]);});
-    P(g=>{mesh(new T.TorusGeometry(0.22,0.045,8,24),'#E6E6E2',g,true,[0,0.16,0]);mesh(new T.CylinderGeometry(0.06,0.06,0.42,10),'#E6E6E2',g,true,[0,-0.08,0]);});
-    P(g=>{mesh(new T.CylinderGeometry(0.15,0.15,0.58,20),B,g,true,[0,0,0],[0,0,Math.PI/2]);mesh(new T.CylinderGeometry(0.06,0.06,0.08,12),D,g,true,[0.33,0,0],[0,0,Math.PI/2]);});
-    P(g=>{const sh=new T.Shape();const n=10;for(let i=0;i<n*2;i++){const r=i%2?0.24:0.33;const a1=i*Math.PI/n+0.05,a2=(i+1)*Math.PI/n-0.05;if(i===0)sh.moveTo(r*Math.cos(a1),r*Math.sin(a1));else sh.lineTo(r*Math.cos(a1),r*Math.sin(a1));sh.lineTo(r*Math.cos(a2),r*Math.sin(a2));}const hole=new T.Path();hole.absarc(0,0,0.09,0,Math.PI*2,true);sh.holes.push(hole);const geo=new T.ExtrudeGeometry(sh,{depth:0.12,bevelEnabled:false});geo.translate(0,0,-0.06);mesh(geo,W,g,true);});
-    P(g=>{mesh(new T.CylinderGeometry(0.36,0.36,0.03,36),D,g,true,[0,0,0],[Math.PI/2,0,0]);mesh(new T.CylinderGeometry(0.13,0.13,0.035,24),B,g,true,[0,0,0],[Math.PI/2,0,0]);});
-    P(g=>{const pts=[];for(let i=0;i<=120;i++){const a=i/120*Math.PI*12;pts.push(new T.Vector3(Math.cos(a)*0.16,-0.32+i/120*0.64,Math.sin(a)*0.16));}mesh(new T.TubeGeometry(new T.CatmullRomCurve3(pts),200,0.03,6,false),W,g,true);});
-    P(g=>{mesh(new T.CylinderGeometry(0.13,0.13,0.48,20),W,g,true);mesh(new T.ConeGeometry(0.08,0.22,12),B,g,true,[0,0.4,0]);});
-    P(g=>{const a=mesh(new T.SphereGeometry(0.16,16,12),W,g,true,[-0.12,-0.1,0]);a.scale.set(0.7,1.3,0.4);const b=mesh(new T.SphereGeometry(0.16,16,12),B,g,true,[0.14,0.14,0]);b.scale.set(0.7,1.3,0.4);});
-    P(g=>{const sh=new T.Shape([new T.Vector2(-0.4,0),new T.Vector2(0.42,0.22),new T.Vector2(0,-0.3)]);const geo=new T.ExtrudeGeometry(sh,{depth:0.04,bevelEnabled:false});mesh(geo,W,g,true);});
+    const W='#FBFBF8',B='#A9C7F1',D='#2A2A2E',RD='#D8473F';
+    /* helpers for recognisable parts: textured toon material, flat labels, rounded boxes, tubes */
+    const toonT=(tex)=>{const m=new T.MeshToonMaterial({map:tex,gradientMap:gm});m.onBeforeCompile=(sh)=>{sh.fragmentShader=sh.fragmentShader.replace('#include <dithering_fragment>',HATCH);};return m;};
+    const meshT=(geo,tex,parent,pos,rot)=>{const g=new T.Group();g.add(new T.Mesh(geo,toonT(tex)));g.add(new T.Mesh(geo,INKS));if(pos)g.position.set(pos[0],pos[1],pos[2]);if(rot)g.rotation.set(rot[0],rot[1],rot[2]);parent.add(g);return g;};
+    const label=(tex,w,h,parent,pos,rot)=>{const m=new T.Mesh(new T.PlaneGeometry(w,h),new T.MeshBasicMaterial({map:tex,transparent:true}));if(pos)m.position.set(pos[0],pos[1],pos[2]);if(rot)m.rotation.set(rot[0],rot[1],rot[2]);parent.add(m);return m;};
+    const rbox=(w,h,d,r)=>{const s=new T.Shape();const x=-w/2,y=-h/2;s.moveTo(x+r,y);s.lineTo(x+w-r,y);s.quadraticCurveTo(x+w,y,x+w,y+r);s.lineTo(x+w,y+h-r);s.quadraticCurveTo(x+w,y+h,x+w-r,y+h);s.lineTo(x+r,y+h);s.quadraticCurveTo(x,y+h,x,y+h-r);s.lineTo(x,y+r);s.quadraticCurveTo(x,y,x+r,y);const g=new T.ExtrudeGeometry(s,{depth:d,bevelEnabled:true,bevelThickness:0.012,bevelSize:0.012,bevelSegments:2,curveSegments:6});g.translate(0,0,-d/2);return g;};
+    const ptube=(pts,r,c,g,closed)=>mesh(new T.TubeGeometry(new T.CatmullRomCurve3(pts,!!closed),Math.max(24,pts.length*6),r,8,!!closed),c,g,true);
+    const INKC='#121212',MONO='"IBM Plex Mono", monospace',RUB='"Rubik", sans-serif';
+    // 01 screw "time": threaded screw whose head is a clock face
+    P(g=>{const k=new T.Group();k.rotation.x=0.62;k.rotation.z=-0.35;g.add(k);
+      mesh(new T.CylinderGeometry(0.075,0.075,0.5,14),W,k,true,[0,-0.2,0]);mesh(new T.ConeGeometry(0.075,0.14,14),W,k,true,[0,-0.52,0],[Math.PI,0,0]);
+      const th=[];for(let i=0;i<=90;i++){const a=i/90*Math.PI*14;th.push(V3(Math.cos(a)*0.085,-0.43+i/90*0.44,Math.sin(a)*0.085));}ptube(th,0.014,W,k);
+      mesh(new T.CylinderGeometry(0.27,0.27,0.09,32),W,k,true,[0,0.1,0]);
+      const face=ctex(256,256,(x,w)=>{x.fillStyle='#FBFBF8';x.fillRect(0,0,w,w);x.strokeStyle=INKC;x.lineWidth=8;x.beginPath();x.arc(128,128,112,0,7);x.stroke();for(let i=0;i<12;i++){const a=i/12*Math.PI*2;x.lineWidth=i%3?5:10;x.beginPath();x.moveTo(128+Math.cos(a)*92,128+Math.sin(a)*92);x.lineTo(128+Math.cos(a)*106,128+Math.sin(a)*106);x.stroke();}x.lineCap='round';x.lineWidth=12;x.beginPath();x.moveTo(128,128);x.lineTo(128,62);x.stroke();x.lineWidth=8;x.strokeStyle='#2B6BF0';x.beginPath();x.moveTo(128,128);x.lineTo(186,150);x.stroke();x.fillStyle=INKC;x.beginPath();x.arc(128,128,12,0,7);x.fill();});
+      label(face,0.46,0.46,k,[0,0.147,0],[-Math.PI/2,0,0]);});
+    // 02 glue "forgiveness": squeezable tube with cap and label
+    P(g=>{const pr=[V3(0.001,-0.36,0),V3(0.16,-0.33,0),V3(0.165,-0.24,0),V3(0.168,-0.15,0),V3(0.17,-0.06,0),V3(0.17,0.03,0),V3(0.17,0.12,0),V3(0.12,0.24,0),V3(0.05,0.29,0),V3(0.05,0.34,0),V3(0.001,0.34,0)].map(v=>new T.Vector2(v.x,v.y));
+      const bo=new T.Group();bo.rotation.z=-Math.PI/2;g.add(bo);const body=new T.Group();body.rotation.y=Math.PI;bo.add(body);
+      const lab=ctex(256,512,(x,w,h)=>{x.fillStyle='#A9C7F1';x.fillRect(0,0,w,h);x.fillStyle='#FBFBF8';x.fillRect(24,236,w-48,196);x.save();x.translate(w/2,334);x.rotate(-Math.PI/2);x.fillStyle=INKC;x.textAlign='center';x.font='800 30px '+RUB;x.fillText('ПРОЩЕНИЕ',0,-4);x.font='500 15px '+MONO;x.fillText('клей · себе и другим',0,28);x.restore();});lab.wrapS=T.RepeatWrapping;lab.repeat.set(1,1);
+      meshT(new T.LatheGeometry(pr,28),lab,body);
+      mesh(new T.BoxGeometry(0.34,0.06,0.05),W,body,true,[0,-0.38,0]);
+      mesh(new T.CylinderGeometry(0.07,0.07,0.16,16),D,body,true,[0,0.42,0]);});
+    // 03 people at 2 am: smartphone with an incoming call at 02:00
+    P(g=>{mesh(rbox(0.42,0.8,0.05,0.07),D,g,true);
+      const scr=ctex(256,480,(x,w,h)=>{x.fillStyle='#1C2C4A';x.fillRect(0,0,w,h);x.fillStyle='#FBFBF8';x.textAlign='center';x.font='300 26px '+RUB;x.fillText('входящий вызов',w/2,70);x.font='900 92px '+RUB;x.fillText('02:00',w/2,175);x.fillStyle='#A9C7F1';x.beginPath();x.arc(w/2,262,44,0,7);x.fill();x.fillStyle='#1C2C4A';x.font='900 40px '+RUB;x.fillText('К',w/2,276);x.fillStyle='#FBFBF8';x.font='500 30px '+RUB;x.fillText('Катя',w/2,350);x.fillStyle='#D8473F';x.beginPath();x.arc(70,420,30,0,7);x.fill();x.fillStyle='#2B6BF0';x.beginPath();x.arc(186,420,30,0,7);x.fill();});
+      label(scr,0.36,0.7,g,[0,0,0.042]);mesh(new T.BoxGeometry(0.1,0.018,0.01),'#121212',g,false,[0,0.365,0.04]);});
+    // 04 spare smile: round pin badge with a smile
+    P(g=>{const k=new T.Group();g.add(k);const f=ctex(256,256,(x,w)=>{x.beginPath();x.arc(128,128,127,0,7);x.clip();x.fillStyle='#A9C7F1';x.fillRect(0,0,w,w);x.fillStyle=INKC;x.beginPath();x.ellipse(86,100,14,20,0,0,7);x.fill();x.beginPath();x.ellipse(170,100,14,20,0,0,7);x.fill();x.lineWidth=16;x.lineCap='round';x.strokeStyle=INKC;x.beginPath();x.arc(128,130,70,0.25,Math.PI-0.25);x.stroke();x.fillStyle='#FBFBF8';x.font='500 20px '+MONO;x.textAlign='center';x.fillText('ЗАПАСНАЯ',128,236);});
+      mesh(new T.CylinderGeometry(0.33,0.33,0.06,40),B,k,true,[0,0,0],[Math.PI/2,0,0]);label(f,0.6,0.6,k,[0,0,0.034]);mesh(new T.TorusGeometry(0.33,0.018,6,40),W,k,true);});
+    // 05 playlist for tears: cassette tape
+    P(g=>{mesh(rbox(0.72,0.46,0.09,0.04),W,g,true);
+      const c=ctex(360,230,(x,w,h)=>{x.fillStyle='#FBFBF8';x.fillRect(0,0,w,h);x.fillStyle='#A9C7F1';x.fillRect(18,16,w-36,120);x.fillStyle=INKC;x.font='700 30px '+RUB;x.textAlign='left';x.fillText('для слёз',34,58);x.font='400 16px '+MONO;x.fillText('сторона A · 90 мин',34,86);x.fillStyle='#2B6BF0';x.beginPath();x.moveTo(300,34);x.quadraticCurveTo(318,62,300,72);x.quadraticCurveTo(282,62,300,34);x.fill();x.fillStyle='#2A2A2E';x.fillRect(70,148,220,58);x.fillStyle='#FBFBF8';[124,236].forEach(cx=>{x.beginPath();x.arc(cx,177,22,0,7);x.fill();x.fillStyle='#2A2A2E';for(let i=0;i<6;i++){const a=i/6*Math.PI*2;x.fillRect(cx+Math.cos(a)*11-3,177+Math.sin(a)*11-3,6,6);}x.fillStyle='#FBFBF8';});x.fillStyle='#8C939C';x.fillRect(150,170,60,14);});
+      label(c,0.68,0.434,g,[0,0,0.062]);});
+    // 06 blanket cocoon: rolled plaid blanket with a spiral end
+    P(g=>{const pl=ctex(256,256,(x,w,h)=>{x.fillStyle='#A9C7F1';x.fillRect(0,0,w,h);x.fillStyle='rgba(251,251,248,.85)';for(let i=0;i<4;i++){x.fillRect(i*64+20,0,14,h);x.fillRect(0,i*64+20,w,14);}x.fillStyle='rgba(43,107,240,.5)';for(let i=0;i<4;i++){x.fillRect(i*64+44,0,5,h);x.fillRect(0,i*64+44,w,5);}});pl.wrapS=pl.wrapT=T.RepeatWrapping;pl.repeat.set(3,1);
+      meshT(new T.CylinderGeometry(0.21,0.21,0.66,28,1,true),pl,g,[0,0,0],[0,0,Math.PI/2]);
+      [-1,1].forEach(sd=>{mesh(new T.CircleGeometry(0.21,28),W,g,true,[sd*0.33,0,0],[0,sd*Math.PI/2,0]);const sp=[];for(let i=0;i<=80;i++){const a=i/80*Math.PI*6;const r=0.02+i/80*0.18;sp.push(V3(sd*0.335,Math.sin(a)*r,Math.cos(a)*r));}ptube(sp,0.012,'#2B6BF0',g);});
+      mesh(new T.TorusGeometry(0.215,0.018,6,28),W,g,true,[-0.16,0,0],[0,Math.PI/2,0]);mesh(new T.TorusGeometry(0.215,0.018,6,28),W,g,true,[0.16,0,0],[0,Math.PI/2,0]);});
+    // 07 something tasty: wrapped candy with stripes and twisted ends
+    P(g=>{const st=ctex(128,128,(x,w,h)=>{x.fillStyle='#FBFBF8';x.fillRect(0,0,w,h);x.fillStyle='#A9C7F1';for(let i=-2;i<6;i++){x.beginPath();x.moveTo(i*32,0);x.lineTo(i*32+16,0);x.lineTo(i*32+16+h,h);x.lineTo(i*32+h,h);x.fill();}});st.wrapS=st.wrapT=T.RepeatWrapping;st.repeat.set(3,2);
+      const c=meshT(new T.SphereGeometry(0.18,24,16),st,g);c.scale.set(1.25,1,1);
+      [-1,1].forEach(sd=>{const w=mesh(new T.ConeGeometry(0.13,0.22,7,1),B,g,true,[sd*0.33,0,0],[0,0,sd*Math.PI/2]);w.rotation.x=0.4;mesh(new T.CylinderGeometry(0.035,0.035,0.06,8),W,g,true,[sd*0.235,0,0],[0,0,Math.PI/2]);});});
+    // 08 call to someone who loves you: retro handset with a coiled cord
+    P(g=>{const arc=[];for(let i=0;i<=16;i++){const a=Math.PI*(0.15+0.7*i/16);arc.push(V3(-Math.cos(a)*0.34,Math.sin(a)*0.16,0));}ptube(arc,0.05,D,g);
+      [-1,1].forEach(sd=>{const e=mesh(new T.CylinderGeometry(0.1,0.085,0.11,20),D,g,true,[sd*0.34,0.02,0.02],[Math.PI/2-0.25,0,sd*0.35]);mesh(new T.CircleGeometry(0.075,20),W,e,true,[0,0.056,0],[-Math.PI/2,0,0]);});
+      const cd=[];for(let i=0;i<=140;i++){const t=i/140;const a=t*Math.PI*18;cd.push(V3(0.34+Math.cos(a)*0.035-t*0.05,-0.06-t*0.38+Math.sin(a)*0.035,0.02+Math.sin(a)*0.035));}ptube(cd,0.01,W,g);
+      mesh(new T.SphereGeometry(0.035,10,8),RD,g,true,[0,0.16,0.05]);});
+    // 09 "I'm fine" valve: pressure gauge, needle stuck on OK
+    P(g=>{mesh(new T.CylinderGeometry(0.06,0.06,0.2,12),D,g,true,[0,-0.36,0]);mesh(new T.CylinderGeometry(0.29,0.29,0.1,36),W,g,true,[0,0,0],[Math.PI/2,0,0]);mesh(new T.TorusGeometry(0.29,0.03,8,36),D,g,true);
+      const f=ctex(256,256,(x,w)=>{x.fillStyle='#FBFBF8';x.fillRect(0,0,w,w);x.strokeStyle=INKC;x.lineWidth=5;x.beginPath();x.arc(128,140,90,Math.PI*1.1,Math.PI*1.9);x.stroke();for(let i=0;i<=8;i++){const a=Math.PI*(1.1+0.8*i/8);x.beginPath();x.moveTo(128+Math.cos(a)*78,140+Math.sin(a)*78);x.lineTo(128+Math.cos(a)*92,140+Math.sin(a)*92);x.stroke();}x.fillStyle='#D8473F';x.font='700 22px '+MONO;x.textAlign='center';x.fillText('плохо',62,196);x.fillStyle='#2B6BF0';x.fillText('ОК',196,196);x.strokeStyle='#121212';x.lineWidth=7;x.lineCap='round';x.beginPath();x.moveTo(128,140);x.lineTo(128+Math.cos(Math.PI*1.82)*80,140+Math.sin(Math.PI*1.82)*80);x.stroke();x.fillStyle=INKC;x.beginPath();x.arc(128,140,10,0,7);x.fill();x.font='500 17px '+MONO;x.fillText('я в порядке',128,232);});
+      label(f,0.5,0.5,g,[0,0,0.052]);});
+    // 10 self-esteem battery: AA battery with a charge level
+    P(g=>{const b=ctex(256,256,(x,w,h)=>{x.fillStyle='#FBFBF8';x.fillRect(0,0,w,h);x.fillStyle='#2B6BF0';x.fillRect(0,h*0.38,w,h*0.62);x.fillStyle='#121212';x.fillRect(0,0,w,26);x.fillStyle='#FBFBF8';x.font='900 60px '+RUB;x.textAlign='center';x.fillText('+',64,150);x.fillText('+',192,150);x.fillStyle='#121212';x.font='600 22px '+MONO;x.fillText('САМО',64,82);x.fillText('УВАЖ.',192,82);});
+      meshT(new T.CylinderGeometry(0.15,0.15,0.56,28),b,g);mesh(new T.CylinderGeometry(0.06,0.06,0.07,14),D,g,true,[0,0.315,0]);mesh(new T.CylinderGeometry(0.15,0.15,0.02,28),D,g,true,[0,-0.28,0]);});
+    // 11 calm morning gear: gear with a small sun in the middle
+    P(g=>{const sh=new T.Shape();const n=10;for(let i=0;i<n*2;i++){const r=i%2?0.24:0.33;const a1=i*Math.PI/n+0.05,a2=(i+1)*Math.PI/n-0.05;if(i===0)sh.moveTo(r*Math.cos(a1),r*Math.sin(a1));else sh.lineTo(r*Math.cos(a1),r*Math.sin(a1));sh.lineTo(r*Math.cos(a2),r*Math.sin(a2));}const hole=new T.Path();hole.absarc(0,0,0.15,0,Math.PI*2,true);sh.holes.push(hole);const geo=new T.ExtrudeGeometry(sh,{depth:0.1,bevelEnabled:false});geo.translate(0,0,-0.05);mesh(geo,W,g,true);
+      mesh(new T.CylinderGeometry(0.075,0.075,0.08,20),B,g,true,[0,0,0],[Math.PI/2,0,0]);for(let i=0;i<8;i++){const a=i/8*Math.PI*2;mesh(new T.BoxGeometry(0.03,0.05,0.04),'#2B6BF0',g,false,[Math.cos(a)*0.11,Math.sin(a)*0.11,0],[0,0,a+Math.PI/2]);}});
+    // 12 "I'm coping" playlist: over-ear headphones
+    P(g=>{const hb=[];for(let i=0;i<=20;i++){const a=Math.PI*i/20;hb.push(V3(Math.cos(a)*0.3,Math.sin(a)*0.34,0));}ptube(hb,0.035,D,g);
+      [-1,1].forEach(sd=>{mesh(new T.BoxGeometry(0.05,0.12,0.06),D,g,true,[sd*0.3,-0.04,0]);mesh(new T.CylinderGeometry(0.13,0.13,0.1,24),B,g,true,[sd*0.31,-0.16,0],[0,0,Math.PI/2]);mesh(new T.TorusGeometry(0.1,0.035,8,24),W,g,true,[sd*0.25,-0.16,0],[0,Math.PI/2,0]);});});
+    // 13 laughing-to-tears spring: spring with a laughing head
+    P(g=>{const pts=[];for(let i=0;i<=120;i++){const a=i/120*Math.PI*10;pts.push(V3(Math.cos(a)*0.12,-0.38+i/120*0.4,Math.sin(a)*0.12));}ptube(pts,0.025,W,g);mesh(new T.CylinderGeometry(0.16,0.16,0.04,20),D,g,true,[0,-0.4,0]);
+      const f=ctex(256,128,(x,w,h)=>{x.fillStyle='#A9C7F1';x.fillRect(0,0,w,h);x.strokeStyle=INKC;x.lineWidth=7;x.lineCap='round';[96,160].forEach(cx=>{x.beginPath();x.moveTo(cx-14,52);x.lineTo(cx,40);x.lineTo(cx+14,52);x.stroke();});x.fillStyle=INKC;x.beginPath();x.arc(128,72,26,0,Math.PI);x.fill();x.fillStyle='#2B6BF0';x.beginPath();x.moveTo(70,62);x.quadraticCurveTo(80,82,70,88);x.quadraticCurveTo(60,82,70,62);x.fill();x.beginPath();x.moveTo(186,62);x.quadraticCurveTo(196,82,186,88);x.quadraticCurveTo(176,82,186,62);x.fill();});f.wrapS=T.RepeatWrapping;f.offset.x=0.25;
+      meshT(new T.SphereGeometry(0.17,24,16),f,g,[0,0.17,0]);});
+    // 14 evening-for-yourself candle: candle on a dish with a flame
+    P(g=>{mesh(new T.CylinderGeometry(0.3,0.26,0.05,28),B,g,true,[0,-0.3,0]);mesh(new T.CylinderGeometry(0.12,0.12,0.46,22),W,g,true,[0,-0.05,0]);
+      mesh(new T.SphereGeometry(0.03,8,6),W,g,true,[0.1,0.1,0.06]);mesh(new T.SphereGeometry(0.025,8,6),W,g,true,[-0.09,0.05,0.08]);mesh(new T.CylinderGeometry(0.008,0.008,0.06,6),'#121212',g,false,[0,0.21,0]);
+      const fl=[new T.Vector2(0.001,0),new T.Vector2(0.05,0.04),new T.Vector2(0.055,0.09),new T.Vector2(0.03,0.15),new T.Vector2(0.001,0.2)];mesh(new T.LatheGeometry(fl,16),'#F2A33A',g,true,[0,0.22,0]);
+      mesh(new T.TorusGeometry(0.3,0.02,6,28,Math.PI*1.4),B,g,true,[0.02,-0.28,0],[Math.PI/2,0,0]);});
+    // 15 aimless walk: sneaker (side view extrusion)
+    P(g=>{const k=new T.Group();k.rotation.y=-0.22;k.rotation.x=0.12;g.add(k);
+      const so=new T.Shape();so.moveTo(-0.38,-0.12);so.lineTo(0.34,-0.12);so.quadraticCurveTo(0.44,-0.11,0.43,-0.03);so.lineTo(-0.4,-0.03);so.quadraticCurveTo(-0.42,-0.1,-0.38,-0.12);
+      const sg=new T.ExtrudeGeometry(so,{depth:0.24,bevelEnabled:true,bevelThickness:0.01,bevelSize:0.01,bevelSegments:1});sg.translate(0,0,-0.12);mesh(sg,W,k,true);
+      const up=new T.Shape();up.moveTo(-0.39,-0.03);up.lineTo(0.42,-0.03);up.quadraticCurveTo(0.42,0.06,0.28,0.08);up.lineTo(0.02,0.14);up.lineTo(-0.16,0.26);up.quadraticCurveTo(-0.34,0.3,-0.38,0.22);up.quadraticCurveTo(-0.42,0.1,-0.39,-0.03);
+      const ug=new T.ExtrudeGeometry(up,{depth:0.2,bevelEnabled:true,bevelThickness:0.02,bevelSize:0.02,bevelSegments:2});ug.translate(0,0,-0.1);mesh(ug,B,k,true);
+      for(let i=0;i<4;i++){mesh(new T.BoxGeometry(0.02,0.012,0.22),W,k,false,[0.02-i*0.06,0.13+i*0.035,0],[0,0,0.5]);}
+      const sd=ctex(430,170,(x,w,h)=>{const X=v=>(v+0.43)/0.87*w,Y=v=>(0.31-v)/0.45*h;x.lineCap='round';x.lineJoin='round';
+        x.strokeStyle='#2B6BF0';x.lineWidth=11;x.beginPath();x.moveTo(X(-0.3),Y(0.02));x.quadraticCurveTo(X(-0.05),Y(0.0),X(0.22),Y(0.12));x.stroke();
+        x.lineWidth=7;x.beginPath();x.moveTo(X(-0.26),Y(0.06));x.quadraticCurveTo(X(-0.04),Y(0.05),X(0.16),Y(0.13));x.stroke();
+        x.strokeStyle='#121212';x.lineWidth=3;x.fillStyle='#FBFBF8';for(let i=0;i<4;i++){x.beginPath();x.arc(X(0.0-i*0.05),Y(0.12+i*0.035),6,0,7);x.fill();x.stroke();}
+        x.lineWidth=4;x.beginPath();x.moveTo(X(-0.4),Y(-0.075));x.lineTo(X(0.42),Y(-0.075));x.stroke();
+        x.fillStyle='#121212';x.font='900 30px '+RUB;x.fillText('HF',X(-0.36),Y(0.12));});
+      label(sd,0.87,0.45,k,[0.005,0.085,0.126]);});
+    // 16 thoughts about the future: folded paper plane
+    P(g=>{const k=new T.Group();k.rotation.set(0.85,-0.45,0.2);g.add(k);
+      const N=V3(0.5,0,0),TC=V3(-0.4,0.04,0),TL=V3(-0.4,0.04,0.34),TR=V3(-0.4,0.04,-0.34),KB=V3(-0.4,-0.17,0);
+      const tri=(a,b,c,col)=>{const geo=new T.BufferGeometry().setFromPoints([a,b,c]);geo.computeVertexNormals();const m=new T.Mesh(geo,toon(col));m.material.side=T.DoubleSide;k.add(m);};
+      tri(N,TC,TL,W);tri(N,TR,TC,W);tri(N,KB,TC,B);tri(N,TC,KB,B);
+      [[N,TL],[N,TR],[N,TC],[N,KB],[TL,TC],[TR,TC],[TC,KB]].forEach(e=>{mesh(new T.TubeGeometry(new T.LineCurve3(e[0],e[1]),1,0.012,6,false),'#121212',k,false);});
+      const tr=[];for(let i=0;i<=14;i++){tr.push(V3(-0.46-i*0.045,0.04+Math.sin(i*0.8)*0.04,0));}const dl=new T.Line(new T.BufferGeometry().setFromPoints(tr),new T.LineDashedMaterial({color:'#2B6BF0',dashSize:0.03,gapSize:0.025}));dl.computeLineDistances();k.add(dl);});
     const DOCK=[[-1.45,0.75,0.62,0.3],[-0.95,1.15,0.7,-0.2],[-0.4,0.95,0.86,0.4],[0.4,0.95,0.86,-0.3],[0.95,1.15,0.7,0.25],[1.45,0.75,0.62,-0.4],[-1.55,0.15,0.6,0.1],[-0.95,0.4,0.88,-0.15],[-0.35,0.25,0.95,0.2],[0.25,-0.25,0.95,-0.3],[-1.15,-0.45,0.72,0.35],[-0.5,-0.55,0.92,-0.1],[0.45,-0.7,0.9,0.3],[1.05,-0.55,0.7,-0.25],[-0.6,-1.15,0.74,0.15],[0.2,-1.35,0.7,-0.35]];
     parts.forEach((p,i)=>{p.userData.a=-Math.PI/2+i/parts.length*Math.PI*2;p.userData.z=(i%2?0.9:-0.3);p.userData.rx=0.3+((i*37)%10)/14;p.userData.ry=0.4+((i*53)%10)/12;p.userData.t0=0.12+i*0.036;});
     const rack=new T.Group();scene.add(cam);cam.add(rack);const RX=[3.45,4.83],RY0=3.0,RS=0.94;
     mesh(new T.BoxGeometry(2.86,8*RS+0.2,0.1),'#FBFBF8',rack,true,[4.14,RY0-3.5*RS,-0.62]);
     for(let r=0;r<=8;r++)mesh(new T.BoxGeometry(2.8,0.035,0.2),'#2A2A2E',rack,true,[4.14,RY0+RS/2-r*RS,-0.5]);
     mesh(new T.BoxGeometry(0.035,8*RS,0.2),'#2A2A2E',rack,true,[4.14,RY0-3.5*RS,-0.5]);
-    const ntag=(n)=>{const tx=ctex(96,64,(x,w,h)=>{x.fillStyle='#121212';x.font='600 40px "IBM Plex Mono", monospace';x.textBaseline='middle';x.fillText(n,6,34);});const sp=new T.Sprite(new T.SpriteMaterial({map:tx,transparent:true}));sp.scale.set(0.27,0.18,1);return sp;};
+    const ntag=(n)=>{const tx=ctex(96,64,(x,w,h)=>{x.fillStyle='#121212';x.font='500 40px "IBM Plex Mono", monospace';x.textBaseline='middle';x.fillText(n,6,34);});const sp=new T.Sprite(new T.SpriteMaterial({map:tx,transparent:true}));sp.scale.set(0.27,0.18,1);return sp;};
     const CELL=[];for(let i=0;i<16;i++){const c=V3(RX[i%2],RY0-Math.floor(i/2)*RS,-0.3);CELL.push(c);const tg=ntag((i<9?'0':'')+(i+1));tg.position.set(c.x-0.5,c.y+0.31,-0.38);rack.add(tg);}
     const sh2=ctex(512,128,(x,w,h)=>{x.clearRect(0,0,w,h);x.save();x.beginPath();x.ellipse(w/2,h/2,w/2-8,h/2-10,0,0,7);x.clip();x.strokeStyle='rgba(18,18,18,.55)';x.lineWidth=3;for(let i=-h;i<w+h;i+=11){x.beginPath();x.moveTo(i,h);x.lineTo(i+h,0);x.stroke();}x.restore();});
     const shadow=new T.Mesh(new T.PlaneGeometry(4.6,0.95),new T.MeshBasicMaterial({map:sh2,transparent:true,depthWrite:false}));shadow.position.set(0.3,-3.02,-0.8);scene.add(shadow);
@@ -187,7 +260,7 @@ class Component extends DCLogic {
     const W=1440,H=780;const vh0=Math.min(s.vh||900,1000);const stage=Math.max(420,vh0-56);const k=(s.vw||1440)/W;const HH=stage/k;const lineH=Math.max(150,Math.min(330,(HH-112)/2));const lw=(s.vw||1440)>=1180?200:0;const k1=Math.min(((s.vw||1440)-lw-40)/W,(stage-24)/H);
     const wheel=CH.map((c,i)=>{const d=i-active;const ad=Math.abs(d);const th=d*25*Math.PI/180;const r=ad===0?100:108;
       const x=r*Math.cos(th);const y=190+r*Math.sin(th)-(ad===0?14:10);const op=ad===0?1:(ad===1?0.45:(ad===2?0.2:0));
-      return {href:'#ch-'+c[0],label:ad===0?c[1]:c[0]+' · '+c[1],style:`position:absolute;left:${x.toFixed(1)}px;top:${y.toFixed(1)}px;white-space:nowrap;text-decoration:none;color:#121212;opacity:${op};font-family:${ad===0?"'Dela Gothic One',sans-serif":"'IBM Plex Mono',monospace"};font-size:${ad===0?20:12.5}px;pointer-events:${ad<3?'auto':'none'}`};});
+      return {href:'#ch-'+c[0],label:ad===0?c[1]:c[0]+' · '+c[1],style:`position:absolute;left:${x.toFixed(1)}px;top:${y.toFixed(1)}px;white-space:nowrap;text-decoration:none;color:#121212;opacity:${op};font-family:${ad===0?"'Rubik',sans-serif;font-weight:900;letter-spacing:-0.02em":"'IBM Plex Mono',monospace"};font-size:${ad===0?20:12.5}px;pointer-events:${ad<3?'auto':'none'}`};});
     const pp={};POS.forEach((p,i)=>{const x=p[0]*e+CX*(1-e),y=p[1]*e+(CY+10)*(1-e);const sc=0.25+0.75*e;pp['p'+(i+1)]=`transform:translate(${x.toFixed(1)}px,${y.toFixed(1)}px) scale(${sc.toFixed(3)});opacity:${Math.min(1,e*1.8).toFixed(2)}`;});
     const sh=(dx,dy,r)=>`transform-box:fill-box;transform-origin:center;transform:translate(${(dx*e).toFixed(1)}px,${(dy*e).toFixed(1)}px) rotate(${(r*e).toFixed(2)}deg)`;
     const nums=POS.map((p,i)=>{const lx=CX+292*Math.cos(p[2]),ly=CY+268*Math.sin(p[2]);return {n:String(i+1),style:`position:absolute;left:${(lx/620*100).toFixed(2)}%;top:${(ly/600*100).toFixed(2)}%;transform:translate(-50%,-50%);border:1px solid #121212;background:#FBFBF8;font-size:10px;line-height:1;padding:3px 4px;min-width:18px;text-align:center;opacity:${e.toFixed(2)};transition:opacity .2s`};});

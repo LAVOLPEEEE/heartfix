@@ -1,7 +1,7 @@
 /* heartfix HF-01 — стили лендинга */
 body{margin:0;background:#A9C7F1}*{box-sizing:border-box}
 a{color:#121212}a:hover{color:#2457C9}
-.dg{font-family:'Rubik',sans-serif;font-weight:900;letter-spacing:-0.03em}.px{font-family:'Pixelify Sans',monospace}.mono{font-family:'IBM Plex Mono',monospace}
+.dg{font-family:'Rubik',sans-serif;font-weight:900;letter-spacing:-0.03em}.px{font-family:'IBM Plex Mono',monospace;font-weight:500;letter-spacing:-0.01em}.mono{font-family:'IBM Plex Mono',monospace}
 .rv{opacity:0;transform:translateY(24px) scale(.96);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.9,.25,1.15)}.rv.in{opacity:1;transform:none}
 .obj{cursor:pointer;background:none;border:0;padding:0;color:#121212;font:inherit;text-align:left}
 .obj .hdl{opacity:0;transition:opacity .15s}.obj:hover .hdl,.obj.sel .hdl,.obj:focus-visible .hdl{opacity:1}
@@ -23,3 +23,47 @@ a{color:#121212}a:hover{color:#2457C9}
 .outl{color:transparent;-webkit-text-stroke:1.4px #121212}
 @media (max-width:1180px){.wheel{display:none!important}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}.rv{opacity:1;transform:none}}
+/* loading screen: messages one by one in the centre; the heart from the first screen fills up as the progress bar and breaks at 100% (7.6s) */
+@property --p{syntax:'<integer>';inherits:false;initial-value:0}
+html.ld-lock{overflow:hidden}
+.ld{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:#FBFBF8;background-image:radial-gradient(rgba(110,159,230,.28) 1px,transparent 1.3px);background-size:12px 12px;color:#121212;font-family:'Rubik',system-ui,sans-serif;transition:opacity .6s ease,visibility .6s}
+.ld.done{opacity:0;visibility:hidden;pointer-events:none}
+.ld-fit{display:flex;flex-direction:column;align-items:center;transform:scale(var(--k,1))}
+.ld-msgs{position:relative;width:600px;height:96px}
+.ld-msg{position:absolute;left:50%;bottom:0;padding:11px 18px 13px;white-space:nowrap;background:#FBFBF8;border:1.5px solid #121212;box-shadow:4px 4px 0 #A9C7F1;font-weight:500;font-size:22px;line-height:1.2;letter-spacing:-0.01em;opacity:0;transform:translate(-50%,10px);animation:ldmsg 1.5s ease var(--d) both}
+.ld-msg::after{content:'';position:absolute;left:22px;bottom:-8px;width:12px;height:12px;background:#FBFBF8;border-right:1.5px solid #121212;border-bottom:1.5px solid #121212;transform:rotate(45deg)}
+.ld-last{animation-name:ldmsgL;animation-duration:.5s}
+.ld-who{display:block;margin-bottom:4px;font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:10.5px;letter-spacing:.04em;color:#4C4C47}
+@keyframes ldmsg{0%{opacity:0;transform:translate(-50%,10px)}22%,78%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-8px)}}
+@keyframes ldmsgL{to{opacity:1;transform:translate(-50%,0)}}
+.ld-heart{position:relative;width:320px;height:411px;margin-top:26px}
+.ld-heart img{position:absolute;left:0;top:0;width:100%;height:100%;display:block}
+.ld-ghost{filter:grayscale(1) contrast(1.15);opacity:.16;animation:ldhide .15s 7.75s forwards}
+.ld-fill{position:absolute;inset:0;clip-path:inset(100% 0 0 0);animation:ldfill 7.4s cubic-bezier(.35,.1,.7,.9) .2s forwards}
+@keyframes ldfill{99.9%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(-40% -40% -40% -40%)}}
+.ld-hl{clip-path:polygon(0 0,52% 0,52% 34%,46.5% 44%,55% 53%,47.5% 63%,57% 73%,50.5% 84%,58% 100%,0 100%);transform-origin:50% 100%;animation:ldL .6s cubic-bezier(.3,1.7,.5,1) 7.75s forwards}
+.ld-hr{clip-path:polygon(52% 0,100% 0,100% 100%,58% 100%,50.5% 84%,57% 73%,47.5% 63%,55% 53%,46.5% 44%,52% 34%);transform-origin:50% 100%;animation:ldR .6s cubic-bezier(.3,1.7,.5,1) 7.75s forwards}
+@keyframes ldL{to{transform:translate(-18px,8px) rotate(-8deg)}}
+@keyframes ldR{to{transform:translate(18px,-2px) rotate(7deg)}}
+.ld-crack{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.ld-crack polyline{stroke-dasharray:1 1;stroke-dashoffset:1;animation:ldcrack .2s ease-in 7.55s forwards}
+@keyframes ldcrack{to{stroke-dashoffset:0}}
+.ld-crack{opacity:0;animation:ldcrk .2s steps(1) 7.55s forwards}
+@keyframes ldcrk{0%,99%{opacity:1}100%{opacity:0}}
+.ld-sh{position:absolute;width:14px;height:12px;background:#E9493F;border:1.5px solid #121212;clip-path:polygon(0 100%,50% 0,100% 100%);opacity:0;animation:.8s cubic-bezier(.2,.8,.3,1) 7.75s forwards}
+.ld-sh1{left:47%;top:40%;animation-name:ldS1}.ld-sh2{left:52%;top:58%;animation-name:ldS2}.ld-sh3{left:50%;top:78%;animation-name:ldS3}
+@keyframes ldS1{0%{opacity:1}100%{opacity:1;transform:translate(-46px,-70px) rotate(-80deg)}}
+@keyframes ldS2{0%{opacity:1}100%{opacity:1;transform:translate(60px,-24px) rotate(110deg)}}
+@keyframes ldS3{0%{opacity:1}100%{opacity:1;transform:translate(-34px,52px) rotate(45deg)}}
+.ld-level{position:absolute;left:-28px;right:-28px;bottom:0;height:0;border-top:1.5px dashed #121212;animation:ldlev 7.4s cubic-bezier(.35,.1,.7,.9) .2s forwards,ldhide .2s 7.6s forwards}
+@keyframes ldlev{to{bottom:100%}}
+.ld-pct{position:absolute;right:-74px;top:-15px;min-width:64px;font-weight:900;font-size:26px;line-height:1;letter-spacing:-0.03em;counter-reset:p var(--p);animation:ldp 7.4s cubic-bezier(.35,.1,.7,.9) .2s forwards}
+.ld-pct::after{content:counter(p) '%'}
+@keyframes ldp{to{--p:100}}
+.ld-krak{position:absolute;left:50%;top:58%;padding:2px 14px 6px;border:3px solid #121212;background:#FBFBF8;font-weight:900;font-size:58px;line-height:1;letter-spacing:-0.04em;opacity:0;transform:translateX(-50%) rotate(-7deg) scale(1.8);animation:ldstamp .32s cubic-bezier(.5,0,.6,1.4) 7.9s forwards}
+@keyframes ldstamp{to{opacity:1;transform:translateX(-50%) rotate(-7deg) scale(1)}}
+.ld-foot{display:flex;gap:18px;margin-top:30px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:#4C4C47}
+.ld-st{position:relative;color:#121212}.ld-st i{font-style:normal;animation:ldhide 0s 7.75s forwards}.ld-st b{position:absolute;left:0;top:0;font-weight:400;white-space:nowrap;opacity:0;animation:ldshow 0s 7.75s forwards}
+.ld.slow .ld-st b::after{content:' · подметаем осколки…'}
+@keyframes ldhide{to{opacity:0}}@keyframes ldshow{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.ld *{animation-duration:.01s!important;animation-delay:0s!important}}
