@@ -288,6 +288,77 @@ class Component extends DCLogic {
         if(broken){wr.updateMatrixWorld(true);u.halves.forEach(h=>h.U.uInv.value.copy(h.cg.matrixWorld).invert());}
         const x=a.left-r.left,y=r.bottom-a.bottom;R1.setViewport(x,y,a.width,a.height);R1.setScissor(x,y,a.width,a.height);cam1.aspect=a.width/a.height;cam1.updateProjectionMatrix();R1.render(sc1,cam1);});
       R1.setScissorTest(false);};
+    /* chapter 02: the heartfix HF-01 box unpacks on scroll — b3lid, 16 parts popping into cells, module pouch, instruction booklet */
+    const sc3=new T.Scene();sc3.add(new T.AmbientLight(0xffffff,0.5));{const d3=new T.DirectionalLight(0xffffff,0.95);d3.position.set(3.5,6,5);sc3.add(d3);}
+    const cam3=new T.PerspectiveCamera(30,1.2,0.1,60);
+    const BX=new T.Group();sc3.add(BX);const BW=2.4,BH=0.62,BD=1.6,TH=0.06;
+    const b3wall=(w,h,d,c,pos)=>mesh(new T.BoxGeometry(w,h,d),c,BX,true,pos);
+    b3wall(BW,TH,BD,W,[0,0,0]);b3wall(BW,BH,TH,W,[0,BH/2,BD/2-TH/2]);b3wall(BW,BH,TH,W,[0,BH/2,-BD/2+TH/2]);b3wall(TH,BH,BD,W,[BW/2-TH/2,BH/2,0]);b3wall(TH,BH,BD,W,[-BW/2+TH/2,BH/2,0]);
+    const front=ctex(1024,264,(x,w,h)=>{x.fillStyle='#FBFBF8';x.fillRect(0,0,w,h);x.fillStyle='#A9C7F1';x.fillRect(0,150,w,114);x.fillStyle=INKC;x.font='900 118px '+RUB;x.fillText('heartfix',40,128);x.font='800 44px '+RUB;x.fillText('®',530,70);x.font='500 30px '+MONO;x.fillText('HF-01',w-160,60);x.font='500 30px '+MONO;x.fillText('ремкомплект для разбитого сердца · 16 + 10 деталей',40,218);x.strokeStyle=INKC;x.lineWidth=4;x.strokeRect(2,2,w-4,h-4);});
+    label(front,BW-0.02,BH-0.02,BX,[0,BH/2,BD/2+0.002]);
+    const ins=ctex(512,512,(x,w,h)=>{x.fillStyle='#EEF3FB';x.fillRect(0,0,w,h);x.strokeStyle='#121212';x.lineWidth=5;for(let r=0;r<4;r++)for(let c=0;c<4;c++){x.strokeRect(14+c*124,14+r*124,112,112);x.fillStyle='#4C4C47';x.font='500 18px '+MONO;x.fillText(String(r*4+c+1).padStart(2,'0'),22+c*124,40+r*124);}});
+    label(ins,1.34,1.34,BX,[-0.44,0.2,0],[-Math.PI/2,0,0]);mesh(new T.BoxGeometry(BW-TH*2.2,0.18,BD-TH*2.2),'#EEF3FB',BX,true,[0,0.1,0]);
+    /* b3lid hinged at the back edge */
+    const LID=new T.Group();LID.position.set(0,BH+0.01,-BD/2-0.03);BX.add(LID);const LW=BW+0.08,LD=BD+0.08,LS=0.22;
+    const lidIn=new T.Group();lidIn.position.set(0,0,LD/2);LID.add(lidIn);
+    mesh(new T.BoxGeometry(LW,TH,LD),W,lidIn,true,[0,LS-TH/2,0]);mesh(new T.BoxGeometry(LW,LS,TH),W,lidIn,true,[0,LS/2,LD/2-TH/2]);mesh(new T.BoxGeometry(LW,LS,TH),W,lidIn,true,[0,LS/2,-LD/2+TH/2]);mesh(new T.BoxGeometry(TH,LS,LD),W,lidIn,true,[LW/2-TH/2,LS/2,0]);mesh(new T.BoxGeometry(TH,LS,LD),W,lidIn,true,[-LW/2+TH/2,LS/2,0]);
+    const b3top=ctex(1024,680,(x,w,h)=>{x.fillStyle='#FBFBF8';x.fillRect(0,0,w,h);x.fillStyle=INKC;x.font='900 150px '+RUB;x.fillText('heartfix',60,250);x.font='800 56px '+RUB;x.fillText('®',735,160);x.font='500 34px '+MONO;x.fillText('HF-01 · ремкомплект для разбитого сердца',64,330);
+      x.strokeStyle=INKC;x.lineWidth=7;x.lineJoin='round';x.beginPath();x.moveTo(800,610);x.bezierCurveTo(700,540,640,480,640,420);x.bezierCurveTo(640,370,680,340,722,340);x.bezierCurveTo(756,340,785,360,800,392);x.bezierCurveTo(815,360,844,340,878,340);x.bezierCurveTo(920,340,960,370,960,420);x.bezierCurveTo(960,480,900,540,800,610);x.stroke();
+      x.strokeStyle='#2B6BF0';x.beginPath();x.moveTo(800,392);x.lineTo(786,440);x.lineTo(812,480);x.lineTo(790,530);x.lineTo(804,600);x.stroke();
+      x.fillStyle='#A9C7F1';x.fillRect(60,420,460,150);x.fillStyle=INKC;x.font='800 44px '+RUB;x.fillText('ХРУПКОЕ',90,490);x.font='500 28px '+MONO;x.fillText('открывать бережно ↑',90,545);x.strokeStyle=INKC;x.lineWidth=4;x.strokeRect(4,4,w-8,h-8);});
+    label(b3top,LW-0.04,LD-0.04,lidIn,[0,LS+0.002,0],[-Math.PI/2,0,0]);
+    const lidFront=ctex(1024,96,(x,w,h)=>{x.fillStyle='#FBFBF8';x.fillRect(0,0,w,h);x.fillStyle=INKC;x.font='500 40px '+MONO;x.fillText('heartfix® HF-01 · по одной детали в день · инструкция внутри',30,62);});
+    label(lidFront,LW-0.02,LS-0.02,lidIn,[0,LS/2,LD/2+0.002]);
+    /* 16 parts (clones of the first-screen parts) */
+    const BP=parts.map((src,i)=>{const c=src.clone(true);c.position.set(0,0,0);c.rotation.set(0,0,0);c.scale.set(1,1,1);const wr=new T.Group();wr.add(c);
+      const bb=new T.Box3().setFromObject(c);const sz=bb.getSize(V3(0,0,0));const ct=bb.getCenter(V3(0,0,0));c.position.sub(ct);const f=0.24/Math.max(sz.x,sz.y,sz.z,0.01);
+      const col=i%4,row=Math.floor(i/4);wr.userData={f,x:-0.44-0.62+0.155+col*0.31,z:-0.62+0.155+row*0.31};wr.position.set(wr.userData.x,0.34,wr.userData.z);BX.add(wr);return wr;});
+    /* module pouch with a flap (label follows the module picked in chapter 01) */
+    const POU=new T.Group();POU.position.set(0.72,0.19,-0.36);BX.add(POU);mesh(new T.BoxGeometry(0.74,0.2,0.62),B,POU,true,[0,0.1,0]);
+    for(let i=0;i<10;i++){mesh(new T.SphereGeometry(0.045,10,8),i%2?W:'#2B6BF0',POU,true,[-0.26+(i%5)*0.13,0.21,-0.12+Math.floor(i/5)*0.2]);}
+    const FLAP=new T.Group();FLAP.position.set(0,0.205,-0.31);POU.add(FLAP);const flapIn=new T.Group();flapIn.position.set(0,0,0.31);FLAP.add(flapIn);mesh(new T.BoxGeometry(0.76,0.025,0.64),B,flapIn,true);
+    let pouchCv=null,pouchTx=null,pouchMod='';const drawPouch=(mod)=>{if(!pouchCv){pouchCv=document.createElement('canvas');pouchCv.width=380;pouchCv.height=320;pouchTx=new T.CanvasTexture(pouchCv);}
+      const x=pouchCv.getContext('2d'),w=380,h=320;x.fillStyle='#A9C7F1';x.fillRect(0,0,w,h);x.strokeStyle=INKC;x.lineWidth=5;x.setLineDash([12,10]);x.strokeRect(14,14,w-28,h-28);x.setLineDash([]);
+      x.fillStyle=INKC;x.font='500 26px '+MONO;x.fillText('МОДУЛЬ · 10 деталей',34,74);x.font='900 44px '+RUB;const t=mod||'твоя история';x.fillText(t.length>14?t.slice(0,14)+'…':t,34,150);x.font='500 22px '+MONO;x.fillText('№17–26',34,270);x.fillStyle='#2B6BF0';x.font='900 90px '+RUB;x.fillText('+10',220,280);pouchTx.needsUpdate=true;};
+    drawPouch('');label(pouchTx,0.72,0.6,flapIn,[0,0.014,0],[-Math.PI/2,0,0]);
+    /* instruction booklet: back + pages + front cover on a spine hinge */
+    const BK=new T.Group();BX.add(BK);const KW=0.62,KD=0.76;const bkIn=new T.Group();BK.add(bkIn);
+    mesh(new T.BoxGeometry(KW,0.015,KD),W,bkIn,true,[0,0,0]);mesh(new T.BoxGeometry(KW-0.03,0.03,KD-0.03),'#F4F4EF',bkIn,true,[0.01,0.022,0]);
+    const page=ctex(372,456,(x,w,h)=>{x.fillStyle='#F4F4EF';x.fillRect(0,0,w,h);x.fillStyle='#4C4C47';x.font='500 18px '+MONO;x.fillText('шаг 01 / 26 · день 1',22,40);x.fillStyle=INKC;x.font='900 38px '+RUB;x.fillText('Винт «время»',22,96);x.font='400 21px '+RUB;['Держит всю конструкцию.','Не ускоряется — поэтому','за один вечер сердце','не собрать.'].forEach((l,i)=>x.fillText(l,22,140+i*30));
+      x.strokeStyle=INKC;x.lineWidth=4;x.beginPath();x.arc(186,350,50,0,7);x.stroke();x.beginPath();x.moveTo(186,350);x.lineTo(186,316);x.moveTo(186,350);x.lineTo(212,362);x.stroke();x.fillStyle='#2B6BF0';x.font='500 16px '+MONO;x.fillText('полистать целиком — глава 07',22,436);});
+    label(page,KW-0.05,KD-0.05,bkIn,[0.01,0.038,0],[-Math.PI/2,0,0]);
+    const COV=new T.Group();COV.position.set(-KW/2,0.045,0);bkIn.add(COV);const covIn=new T.Group();covIn.position.set(KW/2,0,0);COV.add(covIn);mesh(new T.BoxGeometry(KW,0.015,KD),W,covIn,true);
+    const cover=ctex(372,456,(x,w,h)=>{x.fillStyle='#FBFBF8';x.fillRect(0,0,w,h);x.fillStyle='#A9C7F1';x.fillRect(0,300,w,156);x.fillStyle=INKC;x.font='500 18px '+MONO;x.fillText('heartfix® HF-01',24,46);x.font='900 52px '+RUB;x.fillText('Инструкция',22,130);x.font='400 22px '+RUB;x.fillText('сборка сердца',24,176);x.fillText('в 26 шагов',24,206);x.font='500 18px '+MONO;x.fillText('1 деталь в день',24,360);x.fillText('№03 — ставит близкий',24,392);x.strokeStyle=INKC;x.lineWidth=4;x.strokeRect(3,3,w-6,h-6);});
+    label(cover,KW-0.03,KD-0.03,covIn,[0,0.009,0],[-Math.PI/2,0,0]);
+    const inside=ctex(372,456,(x,w,h)=>{x.fillStyle='#FBFBF8';x.fillRect(0,0,w,h);x.fillStyle='#4C4C47';x.font='500 18px '+MONO;x.fillText('как пользоваться',24,44);x.fillStyle=INKC;x.font='800 28px '+RUB;
+      [['1','одна деталь в день'],['2','по порядку номеров'],['3','собирать самой'],['№03','ставит близкий']].forEach((r,i)=>{x.fillStyle='#2B6BF0';x.font='900 30px '+RUB;x.fillText(r[0],24,110+i*72);x.fillStyle=INKC;x.font='500 22px '+RUB;x.fillText(r[1],118,108+i*72);});
+      x.strokeStyle='#121212';x.lineWidth=2;x.setLineDash([6,6]);x.beginPath();x.moveTo(24,400);x.lineTo(w-24,400);x.stroke();x.setLineDash([]);x.fillStyle='#4C4C47';x.font='500 16px '+MONO;x.fillText('ловушка модуля = −3 детали',24,432);});
+    label(inside,KW-0.03,KD-0.03,covIn,[0,-0.009,0],[Math.PI/2,0,Math.PI]);
+    const BKhome=V3(0.72,0.2,0.4);
+    const b3cv3=document.getElementById('hf3d2');let R3=null;
+    if(b3cv3){try{R3=new T.WebGLRenderer({canvas:b3cv3,antialias:true,alpha:true});R3.setPixelRatio(Math.min(2,window.devicePixelRatio||1));R3.setClearColor(0x000000,0);}catch(err){R3=null;}}
+    this._R3=R3;
+    const sm3=(v,a,b)=>{const q=Math.min(1,Math.max(0,(v-a)/(b-a)));return q*q*(3-2*q);};const back3=(q)=>{const c1=1.7,c3=c1+1;return q<=0?0:1+c3*Math.pow(q-1,3)+c1*Math.pow(q-1,2);};
+    const L3=(a,b,q)=>a+(b-a)*q;
+    this._c2=(t)=>{if(!R3)return;const sec=document.getElementById('ch-02');if(!sec)return;if(!sec.classList.contains('c2-3d'))sec.classList.add('c2-3d');
+      const sr=sec.getBoundingClientRect();const vh=window.innerHeight||800;if(sr.bottom<0||sr.top>vh)return;
+      const stH=b3cv3.parentElement.getBoundingClientRect().height||vh;const p=Math.min(1,Math.max(0,(56-sr.top)/Math.max(1,sr.height-stH)));
+      const step=p<0.2?0:(p<0.45?1:(p<0.7?2:3));if(sec.getAttribute('data-step')!==String(step))sec.setAttribute('data-step',String(step));sec.style.setProperty('--c2p',p.toFixed(3));
+      const st=this.state||{};const mod=st.sel!=null?OBJS[st.sel].mod:'';if(mod!==pouchMod){pouchMod=mod;drawPouch(mod);}
+      const r=b3cv3.getBoundingClientRect();if(Math.round(r.width)!==this._c3w||Math.round(r.height)!==this._c3h){this._c3w=Math.round(r.width);this._c3h=Math.round(r.height);R3.setSize(this._c3w,this._c3h,false);}
+      const art=sec.querySelector('.c2-art');if(!art)return;const a=art.getBoundingClientRect();
+      /* timeline */
+      const b3lid=back3(sm3(p,0.12,0.3));LID.rotation.x=-b3lid*1.92;
+      BX.rotation.y=L3(-0.75,-0.18,sm3(p,0,0.35))+Math.sin(t*0.5)*0.03;BX.position.y=Math.sin(t*1.1)*0.02;
+      BP.forEach((w,i)=>{const q=sm3(p,0.24+i*0.011,0.29+i*0.011);const s=back3(q);w.scale.setScalar(Math.max(0.0001,w.userData.f*s));w.position.y=0.34+(1-q)*0.35+(q>0.99?Math.sin(t*2+i)*0.01:0);w.rotation.y=(1-q)*2.4+Math.sin(t*0.7+i)*0.15;w.visible=q>0.001;});
+      const pq=sm3(p,0.46,0.56);FLAP.rotation.x=-back3(pq)*1.7;POU.scale.setScalar(1+(step===2?Math.sin(t*4)*0.025:0));
+      const bq=sm3(p,0.68,0.86),cq=sm3(p,0.84,0.97);
+      BK.position.set(L3(BKhome.x,0.05,bq),L3(BKhome.y,0.95,bq)+Math.sin(t*1.4)*0.02*bq,L3(BKhome.z,0.75,bq));BK.rotation.set(L3(0,1.0,bq),L3(0,0.12,bq),L3(0,-0.06,bq));BK.scale.setScalar(L3(1,1.25,bq));
+      COV.rotation.z=back3(cq)*Math.PI*0.94;
+      /* camera: front 3/4 → look inside → back up for the booklet */
+      const ci=sm3(p,0.12,0.42),cb=sm3(p,0.66,0.86);
+      cam3.position.set(L3(0.4,0.15,ci),L3(1.9,4.1,ci)-cb*1.5,L3(6.4,4.7,ci)+cb*1.1);cam3.lookAt(0,L3(0.35,0.3,ci)+cb*0.35,0);
+      const x=a.left-r.left,y=r.bottom-a.bottom;R3.setScissorTest(true);R3.setViewport(x,y,a.width,a.height);R3.setScissor(x,y,a.width,a.height);R3.setClearColor(0,0);R3.clear();cam3.aspect=a.width/a.height;cam3.updateProjectionMatrix();R3.render(sc3,cam3);R3.setScissorTest(false);};
     const DOCK=[[-1.45,0.75,0.62,0.3],[-0.95,1.15,0.7,-0.2],[-0.4,0.95,0.86,0.4],[0.4,0.95,0.86,-0.3],[0.95,1.15,0.7,0.25],[1.45,0.75,0.62,-0.4],[-1.55,0.15,0.6,0.1],[-0.95,0.4,0.88,-0.15],[-0.35,0.25,0.95,0.2],[0.25,-0.25,0.95,-0.3],[-1.15,-0.45,0.72,0.35],[-0.5,-0.55,0.92,-0.1],[0.45,-0.7,0.9,0.3],[1.05,-0.55,0.7,-0.25],[-0.6,-1.15,0.74,0.15],[0.2,-1.35,0.7,-0.35]];
     parts.forEach((p,i)=>{p.userData.a=-Math.PI/2+i/parts.length*Math.PI*2;p.userData.z=(i%2?0.9:-0.3);p.userData.rx=0.3+((i*37)%10)/14;p.userData.ry=0.4+((i*53)%10)/12;p.userData.t0=0.12+i*0.036;});
     const rack=new T.Group();scene.add(cam);cam.add(rack);const RX=[3.45,4.83],RY0=3.0,RS=0.94;
@@ -312,7 +383,7 @@ class Component extends DCLogic {
     const onHover=(ev)=>{cv.style.cursor=(pick(ev)>=0)?'pointer':'default';};
     cv.addEventListener('pointerdown',onDown);cv.addEventListener('pointermove',onHover);
     const clock=new T.Clock();
-    const loop=()=>{if(this._dead){window.removeEventListener('pointermove',onMove);return;}if(document.getElementById('hf3d')!==cv||(cv1&&document.getElementById('hf3d1')!==cv1)||(pc&&document.getElementById('hfPart')!==pc)){window.removeEventListener('pointermove',onMove);try{R.dispose();if(R2)R2.dispose();if(this._R1)this._R1.dispose();}catch(err){}this._R1=null;this._c1=null;this._R2=null;this._R=null;this._w=0;this._h=0;this.init3D();return;}this._rafG=requestAnimationFrame(loop);
+    const loop=()=>{if(this._dead){window.removeEventListener('pointermove',onMove);return;}if(document.getElementById('hf3d')!==cv||(cv1&&document.getElementById('hf3d1')!==cv1)||(b3cv3&&document.getElementById('hf3d2')!==b3cv3)||(pc&&document.getElementById('hfPart')!==pc)){window.removeEventListener('pointermove',onMove);try{R.dispose();if(R2)R2.dispose();if(this._R1)this._R1.dispose();if(this._R3)this._R3.dispose();}catch(err){}this._R1=null;this._c1=null;this._R3=null;this._c2=null;this._R2=null;this._R=null;this._w=0;this._h=0;this.init3D();return;}this._rafG=requestAnimationFrame(loop);
       const t=clock.getElapsedTime();const dt=Math.min(0.05,t-(this._lt||t));this._lt=t;const tg=this._tA||0;const cur=this._Ac||0;const sp=tg>cur?0.13:0.3;this._Ac=cur+Math.sign(tg-cur)*Math.min(Math.abs(tg-cur),dt*sp);const A=this._Ac;const e=1-A;if(Math.abs((this._lastPa||0)-A)>0.01||(A===tg&&this._lastPa!==A)){this._lastPa=A;this.setState({pa:A});}SEED.value=(Math.floor(t*7)%5)*0.73;
       const w=cv.clientWidth,h=cv.clientHeight;if(w&&h&&(w!==this._w||h!==this._h)){this._w=w;this._h=h;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
       const ti=this._insp||0;const icur=this._ic||0;this._ic=icur+Math.sign(ti-icur)*Math.min(Math.abs(ti-icur),dt*1.3);const ic=sm(this._ic);const open=Math.max(sm((A-0.02)/0.09)*(1-sm((A-0.74)/0.1)),ic);const zoom=Math.max(sm((A-0.03)/0.1)*(1-sm((A-0.76)/0.12)),ic);
@@ -334,7 +405,7 @@ class Component extends DCLogic {
       shadow.scale.set(0.9+0.15*A,1,1);
       if(R2){const sl=this._photo==null?0:this._photo;if(sl!==shown){shown=sl;while(holder.children.length)holder.remove(holder.children[0]);const c=parts[sl].clone(true);c.position.set(0,0,0);c.rotation.set(0,0,0);c.scale.setScalar(1);c.updateMatrixWorld(true);const box=new T.Box3().setFromObject(c);const sz=box.getSize(V3(0,0,0));const ct=box.getCenter(V3(0,0,0));c.position.sub(ct);const wr=new T.Group();wr.add(c);wr.scale.setScalar(1.3/Math.max(sz.x,sz.y,sz.z,0.01));holder.add(wr);}
         holder.rotation.y=t*0.8;holder.rotation.x=Math.sin(t*0.6)*0.25;const pw2=pc.clientWidth,ph2=pc.clientHeight;if(pw2&&ph2&&(pw2!==this._pw||ph2!==this._ph)){this._pw=pw2;this._ph=ph2;R2.setSize(pw2,ph2,false);cam2.aspect=pw2/ph2;cam2.updateProjectionMatrix();}R2.render(sc2,cam2);}
-      R.render(scene,cam);if(this._c1)this._c1(t);};
+      R.render(scene,cam);if(this._c1)this._c1(t);if(this._c2)this._c2(t);};
     loop();this.setState({three:true});
   }
   renderVals(){
@@ -353,7 +424,7 @@ class Component extends DCLogic {
       wheel,curNum:CH[active][0],heartD:HEART_D,gearD:GEAR_D,springD:SPRING_D,leadD:LEAD_D,pp,nums,tiles,
       leadStyle:`opacity:${e.toFixed(2)}`,shL:sh(-74,8,-7),shR:sh(74,-8,6),
       c1Section:`position:relative;height:${stage}px;background:#FBFBF8;overflow:hidden;display:flex;align-items:center;justify-content:center;padding-left:${lw}px`,
-      c1Box:`position:relative;width:${(W*k1).toFixed(0)}px;height:${(H*k1).toFixed(0)}px`,
+      c2Section:`position:relative;height:${Math.round(stage*3.4)}px;background:#FBFBF8;padding-left:${lw}px`,c2Sticky:`position:sticky;top:56px;height:${stage}px;display:flex;align-items:center;justify-content:center;overflow:hidden`,c2Mod:s.sel!=null?('Твой — '+OBJS[s.sel].mod+', 10 деталей именно под эту историю.'):'Выбираешь при заказе: расставание, ссора, потеря, переезд или провал.',c1Box:`position:relative;width:${(W*k1).toFixed(0)}px;height:${(H*k1).toFixed(0)}px`,
       c1Inner:`position:absolute;left:0;top:0;width:${W}px;height:${H}px;transform-origin:top left;transform:scale(${k1.toFixed(4)})`,
       flatStyle:s.three?'display:none':'position:absolute;left:452px;top:246px;width:500px;height:490px',
       tag3d:s.three?'position:absolute;left:452px;top:712px;font-size:10px;color:#4C4C47':'display:none',
