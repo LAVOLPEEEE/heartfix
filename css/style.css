@@ -158,3 +158,21 @@ html.ld-lock{overflow:hidden}
 #ch-02[data-step="3"] .c2-steps li[data-s="1"]{opacity:.6}#ch-02[data-step="3"] .c2-steps li[data-s="1"]::before{background:#121212}
 #ch-02[data-step="3"] .c2-steps li[data-s="2"]{opacity:.6}#ch-02[data-step="3"] .c2-steps li[data-s="2"]::before{background:#121212}
 #ch-02[data-step="3"] .c2-steps li[data-s="3"]{opacity:1;translate:6px 0}#ch-02[data-step="3"] .c2-steps li[data-s="3"]::before{background:#2B6BF0;scale:1.25}
+/* chapter wheel: items glide, labels cross-fade, the number rolls like an odometer */
+.wheel .wl{display:block;transition:transform .75s cubic-bezier(.3,.85,.25,1),opacity .55s ease}
+.wheel .wl-i{display:block;font-family:'IBM Plex Mono',monospace;font-size:12.5px;transition:opacity .45s ease,translate .6s ease}
+.wheel .wl-a{position:absolute;left:0;top:-7px;font-family:'Rubik',sans-serif;font-weight:900;font-size:20px;letter-spacing:-0.02em;opacity:0;translate:-10px 0;transition:opacity .45s ease .1s,translate .6s cubic-bezier(.3,.85,.25,1) .05s}
+.wheel .wl.on .wl-i{opacity:0;translate:10px 0}.wheel .wl.on .wl-a{opacity:1;translate:0 0}
+.wheel .wn-strip{position:absolute;left:0;top:0;width:100%;display:flex;flex-direction:column;transition:transform .8s cubic-bezier(.3,.85,.25,1)}
+.wheel .wn-strip>span{flex:none;height:176px;display:flex;align-items:center;justify-content:center}
+/* chapter 02 blends out of chapter 01's blue */
+#ch-02 .c2-blend{position:absolute;left:0;right:0;top:0;height:300px;background:linear-gradient(180deg,#C8DCF8,rgba(251,251,248,0));pointer-events:none}
+#ch-02 .c2-left>*{opacity:0;translate:0 18px;transition:opacity .6s ease,translate .7s cubic-bezier(.2,.9,.25,1)}
+#ch-02.c2-in .c2-left>*{opacity:1;translate:0 0}
+#ch-02.c2-in .c2-left>:nth-child(2){transition-delay:.08s}#ch-02.c2-in .c2-left>:nth-child(3){transition-delay:.16s}#ch-02.c2-in .c2-left>:nth-child(4){transition-delay:.24s}
+#ch-02 .c2-left>.c2-cta{opacity:0}#ch-02.c2-in[data-step="3"] .c2-left>.c2-cta{opacity:1}
+#ch-02:not(.c2-3d) .c2-left>*{opacity:1;translate:none}
+/* chapter 01: titles sit on the same bottom line whether they take one line or two; the panel hugs its text */
+#ch-01 .c1card{padding-bottom:18px}#ch-01 .c1-t{margin-top:auto}
+#ch-01 .c1-diag{height:auto}#ch-01 .c1-empty{height:452px}
+@media (prefers-reduced-motion:reduce){.wheel .wl,.wheel .wn-strip,.wheel .wl-i,.wheel .wl-a{transition:none}}

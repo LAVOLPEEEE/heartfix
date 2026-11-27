@@ -7,7 +7,7 @@
 <meta name="description" content="heartfix HF-01 — ремкомплект для разбитого сердца: 26 деталей на 26 дней.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800;900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=202611271438">
+<link rel="stylesheet" href="css/style.css?v=202611271452">
 </head>
 <body>
 <div id="hf-loader" class="ld" role="status" aria-label="Загружаем heartfix">
@@ -20,10 +20,10 @@
 <div class="ld-msg ld-last" style="--d:6.3s"><span class="ld-who">он · 02:14 · прочитано</span>Я&nbsp;тебя никогда не&nbsp;любил.</div>
 </div>
 <div class="ld-heart">
-<img class="ld-ghost" src="img/heart-whole.webp?v=202611271438" alt="" width="320" height="411">
+<img class="ld-ghost" src="img/heart-whole.webp?v=202611271452" alt="" width="320" height="411">
 <div class="ld-fill">
-<img class="ld-hl" src="img/heart-whole.webp?v=202611271438" alt="" width="320" height="411">
-<img class="ld-hr" src="img/heart-whole.webp?v=202611271438" alt="" width="320" height="411">
+<img class="ld-hl" src="img/heart-whole.webp?v=202611271452" alt="" width="320" height="411">
+<img class="ld-hr" src="img/heart-whole.webp?v=202611271452" alt="" width="320" height="411">
 </div>
 <svg class="ld-crack" viewBox="0 0 320 411" aria-hidden="true"><polyline pathLength="1" points="166,0 166,138 149,179 176,215 152,256 182,296 162,341 186,411" fill="none" stroke="#121212" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"/></svg>
 <span class="ld-sh ld-sh1"></span><span class="ld-sh ld-sh2"></span><span class="ld-sh ld-sh3"></span>
@@ -80,8 +80,8 @@ function hfCrack(ctx){
 
 <div class="wheel" data-bt-style="[[wheelBox]]">
 <div style="position:absolute;left:-88px;top:102px;width:176px;height:176px;border-radius:50%;border:1.5px solid #121212;background:#FBFBF8"></div>
-<div class="dg" style="position:absolute;left:0;top:102px;width:88px;height:176px;display:flex;align-items:center;justify-content:center;font-size:38px;letter-spacing:-0.03em"><span data-text="curNum"></span></div>
-<template data-for="wheel" data-as="w"><a class="wl" data-bt-href="[[w.href]]" data-bt-style="[[w.style]]"><span data-text="w.label"></span></a></template>
+<div class="dg" style="position:absolute;left:0;top:102px;width:88px;height:176px;display:flex;align-items:center;justify-content:center;font-size:38px;letter-spacing:-0.03em;overflow:hidden"><span class="wn-strip" data-bt-style="[[numStrip]]"><span>00</span><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span>08</span><span>09</span><span>10</span><span>11</span><span>12</span><span>13</span></span></div>
+<template data-for="wheel" data-as="w"><a data-bt-class="[[w.cls]]" data-bt-href="[[w.href]]" data-bt-style="[[w.style]]"><span class="wl-i" data-text="w.small"></span><span class="wl-a" data-text="w.big"></span></a></template>
 </div>
 
 <div>
@@ -158,9 +158,9 @@ function hfCrack(ctx){
 </section>
 
 <section id="ch-01" data-bt-style="[[c1Section]]">
-<canvas id="hf3d1" aria-hidden="true" style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none"></canvas>
 <div style="position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(180deg,rgba(169,199,241,0),#C8DCF8);pointer-events:none" aria-hidden="true"></div>
 <div style="position:absolute;left:0;right:0;bottom:0;height:30%;background-image:radial-gradient(#86B2EE 1px,transparent 1.3px);background-size:9px 9px;opacity:.35;pointer-events:none" aria-hidden="true"></div>
+<canvas id="hf3d1" aria-hidden="true" style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none"></canvas>
 <div data-bt-style="[[c1Box]]">
 <div data-bt-style="[[c1Inner]]">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="wob" x="-8%" y="-8%" width="116%" height="116%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="2"/><feDisplacementMap in="SourceGraphic" scale="2.6"/></filter><pattern id="ht" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 V6" stroke="#121212" stroke-width="1.2"/></pattern></defs></svg>
@@ -181,7 +181,7 @@ function hfCrack(ctx){
 <div class="c1-diag" aria-live="polite">
 <div class="c1-bar"><span>heartfix.exe — твой набор</span><span class="c1-win" aria-hidden="true"><i></i><i></i></span></div>
 <template data-if="c1None"><div class="c1-empty">
-<img class="c1-ghost" src="img/heart-whole.webp?v=202611271438" alt="" width="150" height="193">
+<img class="c1-ghost" src="img/heart-whole.webp?v=202611271452" alt="" width="150" height="193">
 <p class="c1-e1">Здесь появится твой набор</p>
 <p class="c1-e2">← выбери карточку слева</p>
 </div></template>
@@ -205,6 +205,7 @@ function hfCrack(ctx){
 </div>
 </section>
 <section id="ch-02" data-bt-style="[[c2Section]]" data-step="0">
+<div class="c2-blend" aria-hidden="true"></div>
 <div data-bt-style="[[c2Sticky]]">
 <canvas id="hf3d2" aria-hidden="true" style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none"></canvas>
 <div data-bt-style="[[c1Box]]">
@@ -236,8 +237,8 @@ function hfCrack(ctx){
 </div>
 </div>
 </div>
-<script src="js/three.min.js?v=202611271438"></script>
-<script src="js/binder.js?v=202611271438"></script>
-<script src="js/main.js?v=202611271438"></script>
+<script src="js/three.min.js?v=202611271452"></script>
+<script src="js/binder.js?v=202611271452"></script>
+<script src="js/main.js?v=202611271452"></script>
 </body>
 </html>

@@ -286,6 +286,7 @@ class Component extends DCLogic {
         u.shards.forEach(p=>{if(!p.m.visible)return;p.life-=dt;if(p.life<=0){p.m.visible=false;return;}p.v.y-=u.s0*3.2*dt;p.m.position.addScaledVector(p.v,dt);p.m.rotation.x+=p.w.x*dt;p.m.rotation.y+=p.w.y*dt;p.m.scale.setScalar(Math.min(1,p.life*2.2));});
         C1.forEach(o=>{o.visible=o===wr;});
         if(broken){wr.updateMatrixWorld(true);u.halves.forEach(h=>h.U.uInv.value.copy(h.cg.matrixWorld).invert());}
+        const cb=el.getBoundingClientRect();const cx0=cb.left-r.left,cy0=r.bottom-cb.bottom;R1.setScissor(cx0,cy0,cb.width,cb.height);R1.setClearColor(0xFBFBF8,1);R1.clear();R1.setClearColor(0x000000,0);
         const x=a.left-r.left,y=r.bottom-a.bottom;R1.setViewport(x,y,a.width,a.height);R1.setScissor(x,y,a.width,a.height);cam1.aspect=a.width/a.height;cam1.updateProjectionMatrix();R1.render(sc1,cam1);});
       R1.setScissorTest(false);};
     /* chapter 02: the heartfix HF-01 box unpacks on scroll — b3lid, 16 parts popping into cells, module pouch, instruction booklet */
@@ -343,7 +344,7 @@ class Component extends DCLogic {
     this._c2=(t)=>{if(!R3)return;const sec=document.getElementById('ch-02');if(!sec)return;if(!sec.classList.contains('c2-3d'))sec.classList.add('c2-3d');
       const sr=sec.getBoundingClientRect();const vh=window.innerHeight||800;if(sr.bottom<0||sr.top>vh)return;
       const stH=b3cv3.parentElement.getBoundingClientRect().height||vh;const p=Math.min(1,Math.max(0,(56-sr.top)/Math.max(1,sr.height-stH)));
-      const step=p<0.2?0:(p<0.45?1:(p<0.7?2:3));if(sec.getAttribute('data-step')!==String(step))sec.setAttribute('data-step',String(step));sec.style.setProperty('--c2p',p.toFixed(3));
+      if(sr.top<vh*0.8&&!sec.classList.contains('c2-in'))sec.classList.add('c2-in');const step=p<0.2?0:(p<0.45?1:(p<0.7?2:3));if(sec.getAttribute('data-step')!==String(step))sec.setAttribute('data-step',String(step));sec.style.setProperty('--c2p',p.toFixed(3));
       const st=this.state||{};const mod=st.sel!=null?OBJS[st.sel].mod:'';if(mod!==pouchMod){pouchMod=mod;drawPouch(mod);}
       const r=b3cv3.getBoundingClientRect();if(Math.round(r.width)!==this._c3w||Math.round(r.height)!==this._c3h){this._c3w=Math.round(r.width);this._c3h=Math.round(r.height);R3.setSize(this._c3w,this._c3h,false);}
       const art=sec.querySelector('.c2-art');if(!art)return;const a=art.getBoundingClientRect();
@@ -413,7 +414,7 @@ class Component extends DCLogic {
     const W=1440,H=780;const vh0=Math.min(s.vh||900,1000);const stage=Math.max(420,vh0-56);const k=(s.vw||1440)/W;const HH=stage/k;const lineH=Math.max(150,Math.min(330,(HH-112)/2));const lw=(s.vw||1440)>=1180?200:0;const k1=Math.min(((s.vw||1440)-lw-40)/W,(stage-24)/H);
     const wheel=CH.map((c,i)=>{const d=i-active;const ad=Math.abs(d);const th=d*25*Math.PI/180;const r=ad===0?100:108;
       const x=r*Math.cos(th);const y=190+r*Math.sin(th)-(ad===0?14:10);const op=ad===0?1:(ad===1?0.45:(ad===2?0.2:0));
-      return {href:'#ch-'+c[0],label:ad===0?c[1]:c[0]+' · '+c[1],style:`position:absolute;left:${x.toFixed(1)}px;top:${y.toFixed(1)}px;white-space:nowrap;text-decoration:none;color:#121212;opacity:${op};font-family:${ad===0?"'Rubik',sans-serif;font-weight:900;letter-spacing:-0.02em":"'IBM Plex Mono',monospace"};font-size:${ad===0?20:12.5}px;pointer-events:${ad<3?'auto':'none'}`};});
+      return {href:'#ch-'+c[0],small:c[0]+' · '+c[1],big:c[1],cls:'wl'+(ad===0?' on':''),style:`position:absolute;left:0;top:0;transform:translate(${x.toFixed(1)}px,${y.toFixed(1)}px);white-space:nowrap;text-decoration:none;color:#121212;opacity:${op};pointer-events:${ad<3?'auto':'none'}`};});
     const pp={};POS.forEach((p,i)=>{const x=p[0]*e+CX*(1-e),y=p[1]*e+(CY+10)*(1-e);const sc=0.25+0.75*e;pp['p'+(i+1)]=`transform:translate(${x.toFixed(1)}px,${y.toFixed(1)}px) scale(${sc.toFixed(3)});opacity:${Math.min(1,e*1.8).toFixed(2)}`;});
     const sh=(dx,dy,r)=>`transform-box:fill-box;transform-origin:center;transform:translate(${(dx*e).toFixed(1)}px,${(dy*e).toFixed(1)}px) rotate(${(r*e).toFixed(2)}deg)`;
     const nums=POS.map((p,i)=>{const lx=CX+292*Math.cos(p[2]),ly=CY+268*Math.sin(p[2]);return {n:String(i+1),style:`position:absolute;left:${(lx/620*100).toFixed(2)}%;top:${(ly/600*100).toFixed(2)}%;transform:translate(-50%,-50%);border:1px solid #121212;background:#FBFBF8;font-size:10px;line-height:1;padding:3px 4px;min-width:18px;text-align:center;opacity:${e.toFixed(2)};transition:opacity .2s`};});
@@ -421,7 +422,7 @@ class Component extends DCLogic {
       return {arrow:last?'▶':'',style:`display:grid;grid-template-columns:repeat(7,1fr);width:58px;height:58px;padding:6px;background:${bg};gap:0`,cells:PIX[k].join('').split('').map(ch=>`display:block;aspect-ratio:1;background:${ch==='X'?on:'transparent'}`)};});
     const sel=s.sel==null?0:s.sel;const C=OBJS[sel];
     return {
-      wheel,curNum:CH[active][0],heartD:HEART_D,gearD:GEAR_D,springD:SPRING_D,leadD:LEAD_D,pp,nums,tiles,
+      wheel,curNum:CH[active][0],numStrip:`transform:translateY(${(-active*176).toFixed(0)}px)`,heartD:HEART_D,gearD:GEAR_D,springD:SPRING_D,leadD:LEAD_D,pp,nums,tiles,
       leadStyle:`opacity:${e.toFixed(2)}`,shL:sh(-74,8,-7),shR:sh(74,-8,6),
       c1Section:`position:relative;height:${stage}px;background:#FBFBF8;overflow:hidden;display:flex;align-items:center;justify-content:center;padding-left:${lw}px`,
       c2Section:`position:relative;height:${Math.round(stage*3.4)}px;background:#FBFBF8;padding-left:${lw}px`,c2Sticky:`position:sticky;top:56px;height:${stage}px;display:flex;align-items:center;justify-content:center;overflow:hidden`,c2Mod:s.sel!=null?('Твой — '+OBJS[s.sel].mod+', 10 деталей именно под эту историю.'):'Выбираешь при заказе: расставание, ссора, потеря, переезд или провал.',c1Box:`position:relative;width:${(W*k1).toFixed(0)}px;height:${(H*k1).toFixed(0)}px`,
