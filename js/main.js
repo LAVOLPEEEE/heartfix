@@ -23,12 +23,12 @@ const CH=[['00','heartfix'],['01','Поломка'],['02','Знакомство'
 const MATS=['винт «время»','клей «прощение»','люди в 2 ночи','запасная улыбка','плейлист для слёз','одеяло-кокон','что-то вкусное','звонок тому, кто любит','клапан «я в порядке» (декор.)','аккумулятор самоуважения','шестерёнка «спокойное утро»','плейлист «я справляюсь»','пружина «смех до слёз»','свеча «вечер для себя»','прогулка без цели','мысли о будущем'];
 const CIRC=['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩','⑪','⑫','⑬','⑭','⑮','⑯'];
 const OBJS=[
-{item:'брелок на двоих',sit:'расставание',mod:'«После него»',goal:'Перестать ждать и писать.',fin:'открытость новому',x:30,y:200,w:230,r:-4},
-{item:'браслет дружбы',sit:'ссора с лучшей подругой',mod:'«Без лучшей подруги»',goal:'Не винить себя и не оставаться одной.',fin:'дружба снова возможна',x:330,y:176,w:230,r:3},
-{item:'рамка для фото',sit:'смерть близкого человека',mod:'«Светлая память»',goal:'Прожить горе и не закрыться от людей. Без срока и без ловушки.',fin:'любовь остаётся',x:1060,y:140,w:200,r:0},
-{item:'ошейник с жетоном',sit:'потеря питомца',mod:'«Лапа на сердце»',goal:'Разрешить себе горевать всерьёз. Без срока.',fin:'место, где он был счастлив',x:60,y:470,w:220,r:2},
-{item:'коробка «хрупкое»',sit:'переезд и одиночество',mod:'«Новый город»',goal:'Заново найти своих людей.',fin:'здесь тоже дом',x:400,y:432,w:230,r:-3},
-{item:'письмо «к сожалению»',sit:'провал, увольнение, не поступила',mod:'«План Б»',goal:'Вернуть веру в себя.',fin:'новая попытка',x:700,y:262,w:200,r:5}];
+{item:'брелок на двоих',sit:'расставание',mod:'«После него»',goal:'Перестать ждать и писать.',fin:'открытость новому',trap:'ловушка: написать бывшему — откат на 3 детали',x:30,y:200,w:230,r:-4},
+{item:'браслет дружбы',sit:'ссора с лучшей подругой',mod:'«Без лучшей подруги»',goal:'Не винить себя и не оставаться одной.',fin:'дружба снова возможна',trap:'ловушка: делать вид, что тебе всё равно',x:330,y:176,w:230,r:3},
+{item:'рамка для фото',sit:'смерть близкого человека',mod:'«Светлая память»',goal:'Прожить горе и не закрыться от людей. Без срока и без ловушки.',fin:'любовь остаётся',trap:'без срока и без ловушки — никто не торопит',x:1060,y:140,w:200,r:0},
+{item:'ошейник с жетоном',sit:'потеря питомца',mod:'«Лапа на сердце»',goal:'Разрешить себе горевать всерьёз. Без срока.',fin:'место, где он был счастлив',trap:'без срока и без ловушки — горевать можно всерьёз',x:60,y:470,w:220,r:2},
+{item:'коробка «хрупкое»',sit:'переезд и одиночество',mod:'«Новый город»',goal:'Заново найти своих людей.',fin:'здесь тоже дом',trap:'по одной детали в день, как и в базе',x:400,y:432,w:230,r:-3},
+{item:'письмо «к сожалению»',sit:'провал, увольнение, не поступила',mod:'«План Б»',goal:'Вернуть веру в себя.',fin:'новая попытка',trap:'ловушка: сказать себе «я ничего не умею»',x:700,y:262,w:200,r:5}];
 const PIX={heart:['.XX.XX.','XXXXXXX','XXXXXXX','XXXXXXX','.XXXXX.','..XXX..','...X...'],broken:['.XX.XX.','XXX.XXX','XXXX.XX','XXX.XXX','.XX.XX.','..X.X..','...X...'],glass:['XXXXXXX','.X...X.','..X.X..','...X...','..XXX..','.XXXXX.','XXXXXXX'],mail:['.......','XXXXXXX','XX...XX','X.X.X.X','X..X..X','XXXXXXX','.......'],screw:['..XXX..','.XX.XX.','..XXX..','...X...','..XXX..','...X...','...X...']};
 const TILES=['broken','glass','screw','mail','heart'];
 const clamp=(v)=>Math.min(1,Math.max(0,v));
@@ -206,6 +206,88 @@ class Component extends DCLogic {
       tri(N,TC,TL,W);tri(N,TR,TC,W);tri(N,KB,TC,B);tri(N,TC,KB,B);
       [[N,TL],[N,TR],[N,TC],[N,KB],[TL,TC],[TR,TC],[TC,KB]].forEach(e=>{mesh(new T.TubeGeometry(new T.LineCurve3(e[0],e[1]),1,0.012,6,false),'#121212',k,false);});
       const tr=[];for(let i=0;i<=14;i++){tr.push(V3(-0.46-i*0.045,0.04+Math.sin(i*0.8)*0.04,0));}const dl=new T.Line(new T.BufferGeometry().setFromPoints(tr),new T.LineDashedMaterial({color:'#2B6BF0',dashSize:0.03,gapSize:0.025}));dl.computeLineDistances();k.add(dl);});
+    /* chapter 01: the six "what broke it" objects in the same toon + boiling-ink style as the heart and the parts */
+    const C1=[];const C1G=(build)=>{const g=new T.Group();build(g);C1.push(g);};const KR='#D9BE90',FL='#F2A33A';
+    // 01 keyring for two: a heart split along a crack, two rings
+    C1G(g=>{const L=new T.Shape();L.moveTo(0,-0.45);L.bezierCurveTo(-0.25,-0.25,-0.5,-0.05,-0.5,0.18);L.bezierCurveTo(-0.5,0.38,-0.32,0.48,-0.2,0.48);L.bezierCurveTo(-0.08,0.48,0,0.38,0,0.28);L.lineTo(-0.06,0.14);L.lineTo(0.04,0.02);L.lineTo(-0.05,-0.12);L.lineTo(0.03,-0.28);L.lineTo(0,-0.45);
+      const Rr=new T.Shape();Rr.moveTo(0,0.28);Rr.bezierCurveTo(0,0.38,0.08,0.48,0.2,0.48);Rr.bezierCurveTo(0.32,0.48,0.5,0.38,0.5,0.18);Rr.bezierCurveTo(0.5,-0.05,0.25,-0.25,0,-0.45);Rr.lineTo(0.03,-0.28);Rr.lineTo(-0.05,-0.12);Rr.lineTo(0.04,0.02);Rr.lineTo(-0.06,0.14);Rr.lineTo(0,0.28);
+      const ex=(sh)=>{const geo=new T.ExtrudeGeometry(sh,{depth:0.12,bevelEnabled:true,bevelThickness:0.025,bevelSize:0.025,bevelSegments:3,curveSegments:18});geo.translate(0,0,-0.06);return geo;};
+      const l=mesh(ex(L),B,g,false,[-0.12,-0.04,0],[0,0,0.14]);const r=mesh(ex(Rr),W,g,false,[0.12,0.04,0],[0,0,-0.12]);
+      mesh(new T.TorusGeometry(0.075,0.017,8,24),D,l,true,[-0.2,0.56,0]);mesh(new T.TorusGeometry(0.075,0.017,8,24),D,r,true,[0.2,0.56,0]);
+      mesh(new T.TorusGeometry(0.04,0.012,6,16),D,l,true,[-0.2,0.66,0],[0,Math.PI/2,0]);mesh(new T.TorusGeometry(0.04,0.012,6,16),D,r,true,[0.2,0.66,0],[0,Math.PI/2,0]);});
+    // 02 friendship bracelet: beads on a cord and three letter cubes B F F
+    C1G(g=>{const k=new T.Group();k.rotation.x=-1.12;g.add(k);mesh(new T.TorusGeometry(0.42,0.012,6,48),D,k,true);
+      const N=16;for(let i=0;i<N;i++){const a=i/N*Math.PI*2;if(a>4.2&&a<5.3)continue;mesh(new T.SphereGeometry(0.058,14,10),i%2?B:W,k,true,[Math.cos(a)*0.42,Math.sin(a)*0.42,0]);}
+      ['B','F','F'].forEach((ch,j)=>{const a=4.38+j*0.38;const tx=ctex(64,64,(x,w)=>{x.fillStyle='#FBFBF8';x.fillRect(0,0,w,w);x.fillStyle=INKC;x.font='900 44px '+RUB;x.textAlign='center';x.textBaseline='middle';x.fillText(ch,32,35);});
+        const c=meshT(new T.BoxGeometry(0.13,0.13,0.13),tx,k,[Math.cos(a)*0.42,Math.sin(a)*0.42,0]);c.rotation.set(Math.PI/2,0,a+Math.PI/2);});});
+    // 03 photo frame with a candle
+    C1G(g=>{const f=new T.Group();f.rotation.y=-0.22;g.add(f);mesh(rbox(0.6,0.76,0.07,0.03),W,f,true,[-0.12,0.04,0]);
+      const ph=ctex(240,310,(x,w,h)=>{x.fillStyle='#FBFBF8';x.fillRect(0,0,w,h);x.fillStyle='#E4ECF8';x.fillRect(16,16,w-32,h-32);x.strokeStyle=INKC;x.lineWidth=3;x.strokeRect(16,16,w-32,h-32);x.lineWidth=2.5;x.beginPath();x.moveTo(16,232);x.bezierCurveTo(80,190,130,220,170,190);x.bezierCurveTo(196,172,214,186,224,180);x.stroke();x.setLineDash([5,6]);x.beginPath();x.arc(124,118,34,0,7);x.stroke();});
+      label(ph,0.5,0.66,f,[-0.12,0.04,0.051]);
+      mesh(new T.CylinderGeometry(0.07,0.07,0.3,18),W,g,true,[0.4,-0.24,0.12]);mesh(new T.CylinderGeometry(0.006,0.006,0.05,6),'#121212',g,false,[0.4,-0.07,0.12]);
+      mesh(new T.LatheGeometry([new T.Vector2(0.001,0),new T.Vector2(0.035,0.03),new T.Vector2(0.038,0.06),new T.Vector2(0.02,0.1),new T.Vector2(0.001,0.13)],14),FL,g,true,[0.4,-0.06,0.12]);});
+    // 04 collar with a bone-shaped tag
+    C1G(g=>{const k=new T.Group();k.rotation.x=-1.15;g.add(k);mesh(new T.TorusGeometry(0.38,0.065,12,40),B,k,false);mesh(new T.BoxGeometry(0.13,0.11,0.16),W,k,true,[0.38,0,0]);
+      mesh(new T.TorusGeometry(0.04,0.012,6,16),D,g,true,[0,-0.18,0.36],[0,0,0]);
+      const bone=new T.Group();bone.position.set(0,-0.32,0.38);bone.rotation.z=0.12;g.add(bone);mesh(new T.BoxGeometry(0.2,0.07,0.035),W,bone,true);[[-0.1,0.035],[-0.1,-0.035],[0.1,0.035],[0.1,-0.035]].forEach(p=>mesh(new T.SphereGeometry(0.045,12,8),W,bone,true,[p[0],p[1],0]));});
+    // 05 box "fragile"
+    C1G(g=>{const k=new T.Group();k.rotation.set(0.32,-0.55,0);g.add(k);mesh(new T.BoxGeometry(0.72,0.5,0.52),KR,k,false);mesh(new T.BoxGeometry(0.73,0.012,0.14),B,k,true,[0,0.256,0]);
+      const fr=ctex(256,180,(x,w,h)=>{x.clearRect(0,0,w,h);x.fillStyle=INKC;x.font='800 34px '+RUB;x.textAlign='center';x.fillText('ХРУПКОЕ',w/2,62);x.strokeStyle=INKC;x.lineWidth=5;x.beginPath();x.moveTo(108,90);x.lineTo(148,90);x.lineTo(136,124);x.lineTo(120,124);x.closePath();x.stroke();x.beginPath();x.moveTo(128,124);x.lineTo(128,150);x.moveTo(112,150);x.lineTo(144,150);x.stroke();});
+      label(fr,0.5,0.35,k,[0,-0.02,0.262]);
+      const ar=ctex(128,128,(x,w)=>{x.clearRect(0,0,w,w);x.strokeStyle=INKC;x.lineWidth=7;x.lineCap='round';[44,84].forEach(cx=>{x.beginPath();x.moveTo(cx,100);x.lineTo(cx,34);x.moveTo(cx-14,50);x.lineTo(cx,34);x.lineTo(cx+14,50);x.stroke();});});
+      label(ar,0.26,0.26,k,[0.362,0,0],[0,Math.PI/2,0]);});
+    // 06 rejection letter in an envelope
+    C1G(g=>{const sh=new T.Group();sh.position.set(-0.02,0.16,-0.03);sh.rotation.z=0.07;g.add(sh);mesh(new T.BoxGeometry(0.56,0.56,0.012),W,sh,true);
+      const tx=ctex(240,240,(x,w,h)=>{x.fillStyle='#FBFBF8';x.fillRect(0,0,w,h);x.fillStyle=INKC;x.font='500 19px '+MONO;x.fillText('к сожалению,',22,44);x.fillText('вы не прошли…',22,70);x.strokeStyle='#4C4C47';x.lineWidth=2;for(let i=0;i<4;i++){x.beginPath();x.moveTo(22,104+i*24);x.lineTo(w-30-((i*37)%60),104+i*24);x.stroke();}});
+      label(tx,0.52,0.52,sh,[0,0,0.008]);
+      mesh(rbox(0.74,0.44,0.04,0.02),B,g,true,[0,-0.2,0.04]);
+      const fl=ctex(256,152,(x,w,h)=>{x.clearRect(0,0,w,h);x.strokeStyle=INKC;x.lineWidth=4;x.lineJoin='round';x.beginPath();x.moveTo(6,6);x.lineTo(w/2,h*0.62);x.lineTo(w-6,6);x.stroke();x.lineWidth=3;x.beginPath();x.moveTo(6,h-6);x.lineTo(w*0.36,h*0.5);x.moveTo(w-6,h-6);x.lineTo(w*0.64,h*0.5);x.stroke();});
+      label(fl,0.72,0.42,g,[0,-0.2,0.065]);});
+    const sc1=new T.Scene();sc1.add(new T.AmbientLight(0xffffff,0.5));{const d1=new T.DirectionalLight(0xffffff,0.95);d1.position.set(3.5,5,6);sc1.add(d1);}
+    const cam1=new T.PerspectiveCamera(30,1.4,0.1,50);cam1.position.set(0,0.1,3.15);cam1.lookAt(0,0,0);
+    /* real break: two clones of each object, each keeps one side of a zigzag crack (fragment discard in object space) */
+    const CLIPV='varying vec3 vWp;\n',CLIPF='uniform mat4 uInv;uniform float uSide;varying vec3 vWp;\n',CLIPD='vec3 cp=(uInv*vec4(vWp,1.0)).xyz;float tri=abs(fract(cp.y*3.2+0.25)-0.5)*2.0;if(uSide*(cp.x-(tri-0.5)*0.11)<0.0)discard;\n';
+    const clipify=(root,U)=>{root.traverse(o=>{if(!o.isMesh)return;const m0=o.material;let m;
+      if(m0.isShaderMaterial){m=m0.clone();m.uniforms.seed=SEED;m.uniforms.uInv=U.uInv;m.uniforms.uSide=U.uSide;
+        m.vertexShader=CLIPV+m0.vertexShader.replace('gl_Position=projectionMatrix*mv;','vWp=(modelMatrix*vec4(p,1.0)).xyz;gl_Position=projectionMatrix*mv;');
+        m.fragmentShader=CLIPF+m0.fragmentShader.replace('void main(){','void main(){'+CLIPD);}
+      else{m=m0.clone();const toonish=m0.isMeshToonMaterial;m.onBeforeCompile=(sh)=>{sh.uniforms.uInv=U.uInv;sh.uniforms.uSide=U.uSide;
+        sh.vertexShader=CLIPV+sh.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\nvWp=(modelMatrix*vec4(transformed,1.0)).xyz;');
+        sh.fragmentShader=CLIPF+sh.fragmentShader.replace('void main() {','void main() {\n'+CLIPD);if(toonish)sh.fragmentShader=sh.fragmentShader.replace('#include <dithering_fragment>',HATCH);};
+        m.customProgramCacheKey=()=>'c1clip'+(toonish?'t':'b');}
+      o.material=m;});};
+    C1.forEach((g,i)=>{const bx=new T.Box3().setFromObject(g);const sz=bx.getSize(V3(0,0,0));const ct=bx.getCenter(V3(0,0,0));g.position.sub(ct);const wr=new T.Group();wr.add(g);const s0=Math.max(sz.x,sz.y,sz.z*0.8,0.01);
+      const halves=[-1,1].map(sd=>{const pv=new T.Group();const cg=g.clone(true);const U={uInv:{value:new T.Matrix4()},uSide:{value:sd}};clipify(cg,U);pv.add(cg);pv.visible=false;wr.add(pv);return {pv,cg,U,sd};});
+      const shards=[];for(let j=0;j<7;j++){const sh=mesh(new T.TetrahedronGeometry(s0*0.045),j%3?B:W,wr,true);sh.visible=false;shards.push({m:sh,v:V3(0,0,0),w:V3(0,0,0)});}
+      wr.userData={fit:1.22/s0,s0,sc:1,spin:0,t0:-9,lastSel:false,split:0,halves,shards,whole:g};wr.scale.setScalar(wr.userData.fit);sc1.add(wr);C1[i]=wr;});
+    const cv1=document.getElementById('hf3d1');let R1=null;
+    if(cv1){try{R1=new T.WebGLRenderer({canvas:cv1,antialias:true,alpha:true});R1.setPixelRatio(Math.min(2,window.devicePixelRatio||1));R1.setClearColor(0x000000,0);R1.autoClear=false;}catch(err){R1=null;}}
+    if(R1){const sec=document.getElementById('ch-01');if(sec)sec.classList.add('c1-3d');this._R1=R1;}
+    let lt1=0;
+    this._c1=(t)=>{if(!R1)return;const sec=document.getElementById('ch-01');if(!sec)return;if(!sec.classList.contains('c1-3d'))sec.classList.add('c1-3d');
+      const r=cv1.getBoundingClientRect();if(r.bottom<0||r.top>(window.innerHeight||800)||!r.width)return;
+      if(Math.round(r.width)!==this._c1w||Math.round(r.height)!==this._c1h){this._c1w=Math.round(r.width);this._c1h=Math.round(r.height);R1.setSize(this._c1w,this._c1h,false);}
+      const dt=Math.min(0.05,Math.max(0,t-lt1));lt1=t;R1.setScissorTest(false);R1.clear();R1.setScissorTest(true);
+      const st=this.state||{};const has=st.sel!=null;const cards=sec.querySelectorAll('.c1card');
+      cards.forEach((el,i)=>{const wr=C1[i];if(!wr)return;const art=el.querySelector('.c1-art');if(!art)return;const a=art.getBoundingClientRect();if(a.width<2)return;
+        const u=wr.userData;const isSel=has&&st.sel===i;const hov=el.matches(':hover');
+        if(isSel&&!u.lastSel){u.t0=t;u.burst=false;}u.lastSel=isSel;const k=t-u.t0;
+        u.spin+=dt*(hov&&!isSel?2.4:0);u.spin*=hov?1:0.96;
+        const tgt=isSel?1.1:(has?0.86:1);u.sc+=(tgt-u.sc)*Math.min(1,dt*7);
+        /* break: shiver 0.15s, then the halves spring apart; un-select glues them back */
+        const shiver=isSel&&k<0.15;const want=isSel&&k>=0.15?1:0;
+        if(want){const e=k-0.15;u.split=1-Math.exp(-e*9)*Math.cos(e*14);}else{u.split+=(0-u.split)*Math.min(1,dt*8);if(u.split<0.002)u.split=0;}
+        const broken=u.split>0.002||want;u.whole.visible=!broken;
+        wr.scale.setScalar(u.fit*u.sc);
+        wr.rotation.set(0.12+Math.sin(t*0.9+i)*0.05,Math.sin(t*0.55+i*1.3)*0.42*(isSel?0.35:1)+u.spin,0);
+        wr.position.set(shiver?(Math.random()-0.5)*0.05:0,Math.sin(t*1.3+i)*0.03,0);
+        u.halves.forEach(h=>{h.pv.visible=broken;const d=u.split*u.s0*0.14;h.pv.position.set(h.sd*d,-u.split*u.s0*0.03,0);h.pv.rotation.set(0,h.sd*u.split*0.18,-h.sd*u.split*0.14);});
+        if(isSel&&k>=0.15&&!u.burst){u.burst=true;u.shards.forEach((p,j)=>{p.m.visible=true;p.m.position.set((Math.random()-0.5)*u.s0*0.08,(Math.random()-0.5)*u.s0*0.5,u.s0*0.15);const ang=(j/u.shards.length)*Math.PI*2+Math.random()*0.5;p.v.set(Math.cos(ang)*u.s0*(0.8+Math.random()*0.6),u.s0*(0.6+Math.random()*0.9),u.s0*(0.3+Math.random()*0.5));p.w.set(Math.random()*9,Math.random()*9,Math.random()*9);p.life=0.9+Math.random()*0.4;p.m.scale.setScalar(1);});}
+        u.shards.forEach(p=>{if(!p.m.visible)return;p.life-=dt;if(p.life<=0){p.m.visible=false;return;}p.v.y-=u.s0*3.2*dt;p.m.position.addScaledVector(p.v,dt);p.m.rotation.x+=p.w.x*dt;p.m.rotation.y+=p.w.y*dt;p.m.scale.setScalar(Math.min(1,p.life*2.2));});
+        C1.forEach(o=>{o.visible=o===wr;});
+        if(broken){wr.updateMatrixWorld(true);u.halves.forEach(h=>h.U.uInv.value.copy(h.cg.matrixWorld).invert());}
+        const x=a.left-r.left,y=r.bottom-a.bottom;R1.setViewport(x,y,a.width,a.height);R1.setScissor(x,y,a.width,a.height);cam1.aspect=a.width/a.height;cam1.updateProjectionMatrix();R1.render(sc1,cam1);});
+      R1.setScissorTest(false);};
     const DOCK=[[-1.45,0.75,0.62,0.3],[-0.95,1.15,0.7,-0.2],[-0.4,0.95,0.86,0.4],[0.4,0.95,0.86,-0.3],[0.95,1.15,0.7,0.25],[1.45,0.75,0.62,-0.4],[-1.55,0.15,0.6,0.1],[-0.95,0.4,0.88,-0.15],[-0.35,0.25,0.95,0.2],[0.25,-0.25,0.95,-0.3],[-1.15,-0.45,0.72,0.35],[-0.5,-0.55,0.92,-0.1],[0.45,-0.7,0.9,0.3],[1.05,-0.55,0.7,-0.25],[-0.6,-1.15,0.74,0.15],[0.2,-1.35,0.7,-0.35]];
     parts.forEach((p,i)=>{p.userData.a=-Math.PI/2+i/parts.length*Math.PI*2;p.userData.z=(i%2?0.9:-0.3);p.userData.rx=0.3+((i*37)%10)/14;p.userData.ry=0.4+((i*53)%10)/12;p.userData.t0=0.12+i*0.036;});
     const rack=new T.Group();scene.add(cam);cam.add(rack);const RX=[3.45,4.83],RY0=3.0,RS=0.94;
@@ -230,7 +312,7 @@ class Component extends DCLogic {
     const onHover=(ev)=>{cv.style.cursor=(pick(ev)>=0)?'pointer':'default';};
     cv.addEventListener('pointerdown',onDown);cv.addEventListener('pointermove',onHover);
     const clock=new T.Clock();
-    const loop=()=>{if(this._dead){window.removeEventListener('pointermove',onMove);return;}if(document.getElementById('hf3d')!==cv||(pc&&document.getElementById('hfPart')!==pc)){window.removeEventListener('pointermove',onMove);try{R.dispose();if(R2)R2.dispose();}catch(err){}this._R2=null;this._R=null;this._w=0;this._h=0;this.init3D();return;}this._rafG=requestAnimationFrame(loop);
+    const loop=()=>{if(this._dead){window.removeEventListener('pointermove',onMove);return;}if(document.getElementById('hf3d')!==cv||(cv1&&document.getElementById('hf3d1')!==cv1)||(pc&&document.getElementById('hfPart')!==pc)){window.removeEventListener('pointermove',onMove);try{R.dispose();if(R2)R2.dispose();if(this._R1)this._R1.dispose();}catch(err){}this._R1=null;this._c1=null;this._R2=null;this._R=null;this._w=0;this._h=0;this.init3D();return;}this._rafG=requestAnimationFrame(loop);
       const t=clock.getElapsedTime();const dt=Math.min(0.05,t-(this._lt||t));this._lt=t;const tg=this._tA||0;const cur=this._Ac||0;const sp=tg>cur?0.13:0.3;this._Ac=cur+Math.sign(tg-cur)*Math.min(Math.abs(tg-cur),dt*sp);const A=this._Ac;const e=1-A;if(Math.abs((this._lastPa||0)-A)>0.01||(A===tg&&this._lastPa!==A)){this._lastPa=A;this.setState({pa:A});}SEED.value=(Math.floor(t*7)%5)*0.73;
       const w=cv.clientWidth,h=cv.clientHeight;if(w&&h&&(w!==this._w||h!==this._h)){this._w=w;this._h=h;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
       const ti=this._insp||0;const icur=this._ic||0;this._ic=icur+Math.sign(ti-icur)*Math.min(Math.abs(ti-icur),dt*1.3);const ic=sm(this._ic);const open=Math.max(sm((A-0.02)/0.09)*(1-sm((A-0.74)/0.1)),ic);const zoom=Math.max(sm((A-0.03)/0.1)*(1-sm((A-0.76)/0.12)),ic);
@@ -252,7 +334,7 @@ class Component extends DCLogic {
       shadow.scale.set(0.9+0.15*A,1,1);
       if(R2){const sl=this._photo==null?0:this._photo;if(sl!==shown){shown=sl;while(holder.children.length)holder.remove(holder.children[0]);const c=parts[sl].clone(true);c.position.set(0,0,0);c.rotation.set(0,0,0);c.scale.setScalar(1);c.updateMatrixWorld(true);const box=new T.Box3().setFromObject(c);const sz=box.getSize(V3(0,0,0));const ct=box.getCenter(V3(0,0,0));c.position.sub(ct);const wr=new T.Group();wr.add(c);wr.scale.setScalar(1.3/Math.max(sz.x,sz.y,sz.z,0.01));holder.add(wr);}
         holder.rotation.y=t*0.8;holder.rotation.x=Math.sin(t*0.6)*0.25;const pw2=pc.clientWidth,ph2=pc.clientHeight;if(pw2&&ph2&&(pw2!==this._pw||ph2!==this._ph)){this._pw=pw2;this._ph=ph2;R2.setSize(pw2,ph2,false);cam2.aspect=pw2/ph2;cam2.updateProjectionMatrix();}R2.render(sc2,cam2);}
-      R.render(scene,cam);};
+      R.render(scene,cam);if(this._c1)this._c1(t);};
     loop();this.setState({three:true});
   }
   renderVals(){
@@ -315,7 +397,7 @@ class Component extends DCLogic {
         is1:i===0,is2:i===1,is3:i===2,is4:i===3,is5:i===4,is6:i===5,
         cls:'obj rv'+(seen[key]?' in':'')+(i===sel?' sel':''),pick:()=>this.setState({sel:i}),
         style:`position:absolute;left:${o.x}px;top:${o.y}px;width:${o.w}px;rotate:${o.r}deg;transition-delay:${(i*0.08).toFixed(2)}s`};}),
-      cur:{n:'0'+(sel+1),sit:C.sit,mod:C.mod,goal:C.goal,fin:C.fin}
+      c1Has:s.sel!=null,c1None:s.sel==null,step2Cls:'c1-dot'+(s.sel!=null?' on':''),diagCls:'c1-res k'+sel,reset:()=>this.setState({sel:null}),d:{n:'0'+(sel+1),sit:C.sit.charAt(0).toUpperCase()+C.sit.slice(1),mod:C.mod,goal:C.goal,fin:C.fin,trap:C.trap},cards:OBJS.map((o,i)=>{const key='o'+i;const has=s.sel!=null;return {key,n:'0'+(i+1),sit:o.sit.charAt(0).toUpperCase()+o.sit.slice(1),item:o.item,is1:i===0,is2:i===1,is3:i===2,is4:i===3,is5:i===4,is6:i===5,pressed:has&&i===sel?'true':'false',cls:'c1card'+(seen[key]?' in':'')+(has?(i===sel?' sel':' dim'):''),style:`transition-delay:${(i*0.07).toFixed(2)}s,${(i*0.07).toFixed(2)}s,0s,0s,0s`,pick:()=>this.setState({sel:i})};}),cur:{n:'0'+(sel+1),sit:C.sit,mod:C.mod,goal:C.goal,fin:C.fin}
     };
   }
 }
