@@ -50,7 +50,7 @@ class Component extends DCLogic {
     for(let i=0;i<CH.length;i++){const el=document.getElementById('ch-'+CH[i][0]);if(el&&el.getBoundingClientRect().top<vh*0.5)active=i;}
     const root=document.getElementById('hf-root');const vw=root?root.clientWidth:1440;
     const hero=document.getElementById('ch-00');const st=hero?-hero.getBoundingClientRect().top+56:0;
-    const a=clamp(st/560);
+    const a=clamp(st/560);document.querySelectorAll('#ch-01,#ch-03').forEach(el=>{if(!el.classList.contains('ch-in')&&el.getBoundingClientRect().top<vh*0.7)el.classList.add('ch-in');});
     const s=this.state||{};const seen=Object.assign({},s.seen);let ch=false;
     document.querySelectorAll('[data-rv]').forEach(el=>{const k=el.getAttribute('data-rv');if(!seen[k]&&el.getBoundingClientRect().top<vh*0.88){seen[k]=true;ch=true;}});
     if(ch||s.active!==active||Math.abs((s.a||0)-a)>0.003||s.vw!==vw||s.vh!==vh)this.setState({active,a,seen,vw,vh});
@@ -290,6 +290,7 @@ class Component extends DCLogic {
         const x=a.left-r.left,y=r.bottom-a.bottom;R1.setViewport(x,y,a.width,a.height);R1.setScissor(x,y,a.width,a.height);cam1.aspect=a.width/a.height;cam1.updateProjectionMatrix();R1.render(sc1,cam1);});
       R1.setScissorTest(false);};
     /* chapter 02: the heartfix HF-01 box unpacks on scroll — b3lid, 16 parts popping into cells, module pouch, instruction booklet */
+    const ownMats=(root)=>{root.traverse(o=>{if(!o.material)return;const m0=o.material;const m=m0.clone();if(m0.onBeforeCompile)m.onBeforeCompile=m0.onBeforeCompile;if(m0.customProgramCacheKey)m.customProgramCacheKey=m0.customProgramCacheKey;if(m.isShaderMaterial&&m.uniforms&&m.uniforms.seed)m.uniforms.seed=SEED;o.material=m;});return root;};
     const sc3=new T.Scene();sc3.add(new T.AmbientLight(0xffffff,0.5));{const d3=new T.DirectionalLight(0xffffff,0.95);d3.position.set(3.5,6,5);sc3.add(d3);}
     const cam3=new T.PerspectiveCamera(30,1.2,0.1,60);
     const BX=new T.Group();sc3.add(BX);const BW=2.4,BH=0.62,BD=1.6,TH=0.06;
@@ -311,7 +312,7 @@ class Component extends DCLogic {
     const lidFront=ctex(1024,96,(x,w,h)=>{x.fillStyle='#FBFBF8';x.fillRect(0,0,w,h);x.fillStyle=INKC;x.font='500 40px '+MONO;x.fillText('heartfix® HF-01 · по одной детали в день · инструкция внутри',30,62);});
     label(lidFront,LW-0.02,LS-0.02,lidIn,[0,LS/2,LD/2+0.002]);
     /* 16 parts (clones of the first-screen parts) */
-    const BP=parts.map((src,i)=>{const c=src.clone(true);c.position.set(0,0,0);c.rotation.set(0,0,0);c.scale.set(1,1,1);const wr=new T.Group();wr.add(c);
+    const BP=parts.map((src,i)=>{const c=ownMats(src.clone(true));c.position.set(0,0,0);c.rotation.set(0,0,0);c.scale.set(1,1,1);const wr=new T.Group();wr.add(c);
       const bb=new T.Box3().setFromObject(c);const sz=bb.getSize(V3(0,0,0));const ct=bb.getCenter(V3(0,0,0));c.position.sub(ct);const f=0.24/Math.max(sz.x,sz.y,sz.z,0.01);
       const col=i%4,row=Math.floor(i/4);wr.userData={f,x:-0.44-0.62+0.155+col*0.31,z:-0.62+0.155+row*0.31};wr.position.set(wr.userData.x,0.34,wr.userData.z);BX.add(wr);return wr;});
     /* module pouch with a flap (label follows the module picked in chapter 01) */
@@ -360,6 +361,27 @@ class Component extends DCLogic {
       const ci=sm3(p,0.12,0.42),cb=sm3(p,0.66,0.86);
       cam3.position.set(L3(0.4,0.15,ci),L3(1.9,4.1,ci)-cb*1.5,L3(6.4,4.7,ci)+cb*1.1);cam3.lookAt(0,L3(0.35,0.3,ci)+cb*0.35,0);
       const x=a.left-r.left,y=r.bottom-a.bottom;R3.setScissorTest(true);R3.setViewport(x,y,a.width,a.height);R3.setScissor(x,y,a.width,a.height);R3.setClearColor(0,0);R3.clear();cam3.aspect=a.width/a.height;cam3.updateProjectionMatrix();R3.render(sc3,cam3);R3.setScissorTest(false);};
+    /* chapter 03: the 16 parts in a 4×4 tray + the selected one large, in the same toon/ink style */
+    const sc4=new T.Scene();sc4.add(new T.AmbientLight(0xffffff,0.5));{const d4=new T.DirectionalLight(0xffffff,0.95);d4.position.set(3.5,5,6);sc4.add(d4);}
+    const cam4=new T.PerspectiveCamera(30,1,0.1,50);cam4.position.set(0,0.1,3.3);cam4.lookAt(0,0,0);
+    const C4=parts.map((src)=>{const c=ownMats(src.clone(true));c.position.set(0,0,0);c.rotation.set(0,0,0);c.scale.set(1,1,1);const bb=new T.Box3().setFromObject(c);const sz=bb.getSize(V3(0,0,0));const ct=bb.getCenter(V3(0,0,0));c.position.sub(ct);
+      const wr=new T.Group();wr.add(c);wr.userData={fit:1.25/Math.max(sz.x,sz.y,sz.z*0.85,0.01),spin:0};wr.visible=false;sc4.add(wr);return wr;});
+    const c4cv=document.getElementById('hf3d3');let R4=null;
+    if(c4cv){try{R4=new T.WebGLRenderer({canvas:c4cv,antialias:true,alpha:true});R4.setPixelRatio(Math.min(2,window.devicePixelRatio||1));R4.setClearColor(0x000000,0);R4.autoClear=false;}catch(err){R4=null;}}
+    this._R4=R4;let c4lt=0,c4sel=-1,c4t0=0;
+    this._c3=(t)=>{if(!R4)return;const sec=document.getElementById('ch-03');if(!sec)return;const r=c4cv.getBoundingClientRect();if(r.bottom<0||r.top>(window.innerHeight||800)||!r.width)return;
+      if(Math.round(r.width)!==this._c4w||Math.round(r.height)!==this._c4h){this._c4w=Math.round(r.width);this._c4h=Math.round(r.height);R4.setSize(this._c4w,this._c4h,false);}
+      const dt=Math.min(0.05,Math.max(0,t-c4lt));c4lt=t;const st=this.state||{};const sel=st.p3||0;if(sel!==c4sel){c4sel=sel;c4t0=t;}
+      R4.setScissorTest(false);R4.clear();R4.setScissorTest(true);
+      const draw=(i,el,big)=>{const a=el.getBoundingClientRect();if(a.width<2)return;const w=C4[i];const u=w.userData;C4.forEach(o=>{o.visible=o===w;});
+        if(big){const k=t-c4t0;const intro=k<1.2?1-Math.pow(1-Math.min(1,k/0.7),3):1;const sp=k<1.2?(1-intro)*Math.PI*2:0;
+          w.scale.setScalar(u.fit*(0.5+0.4*intro));w.rotation.set(0.2+Math.sin(t*0.8)*0.05,Math.sin(t*0.55)*0.85+sp,Math.sin(t*0.5)*0.04);w.position.set(0,Math.sin(t*1.2)*0.03,0);cam4.position.set(0,0.1,2.9);}
+        else{const hov=el.parentElement&&el.parentElement.matches(':hover');u.spin+=dt*(hov?2.6:0);u.spin*=hov?1:0.95;const on=i===sel;
+          w.scale.setScalar(u.fit*(on?1.08:0.92));w.rotation.set(0.14,Math.sin(t*0.6+i*0.8)*0.4+u.spin,0);w.position.set(0,0,0);cam4.position.set(0,0.1,3.3);}
+        cam4.lookAt(0,0,0);const x=a.left-r.left,y=r.bottom-a.bottom;R4.setViewport(x,y,a.width,a.height);R4.setScissor(x,y,a.width,a.height);cam4.aspect=a.width/a.height;cam4.updateProjectionMatrix();R4.render(sc4,cam4);};
+      sec.querySelectorAll('.c3-slot').forEach((el,i)=>{if(C4[i])draw(i,el,false);});
+      const view=sec.querySelector('.c3-view');if(view&&C4[sel])draw(sel,view,true);
+      R4.setScissorTest(false);};
     const DOCK=[[-1.45,0.75,0.62,0.3],[-0.95,1.15,0.7,-0.2],[-0.4,0.95,0.86,0.4],[0.4,0.95,0.86,-0.3],[0.95,1.15,0.7,0.25],[1.45,0.75,0.62,-0.4],[-1.55,0.15,0.6,0.1],[-0.95,0.4,0.88,-0.15],[-0.35,0.25,0.95,0.2],[0.25,-0.25,0.95,-0.3],[-1.15,-0.45,0.72,0.35],[-0.5,-0.55,0.92,-0.1],[0.45,-0.7,0.9,0.3],[1.05,-0.55,0.7,-0.25],[-0.6,-1.15,0.74,0.15],[0.2,-1.35,0.7,-0.35]];
     parts.forEach((p,i)=>{p.userData.a=-Math.PI/2+i/parts.length*Math.PI*2;p.userData.z=(i%2?0.9:-0.3);p.userData.rx=0.3+((i*37)%10)/14;p.userData.ry=0.4+((i*53)%10)/12;p.userData.t0=0.12+i*0.036;});
     const rack=new T.Group();scene.add(cam);cam.add(rack);const RX=[3.45,4.83],RY0=3.0,RS=0.94;
@@ -384,7 +406,7 @@ class Component extends DCLogic {
     const onHover=(ev)=>{cv.style.cursor=(pick(ev)>=0)?'pointer':'default';};
     cv.addEventListener('pointerdown',onDown);cv.addEventListener('pointermove',onHover);
     const clock=new T.Clock();
-    const loop=()=>{if(this._dead){window.removeEventListener('pointermove',onMove);return;}if(document.getElementById('hf3d')!==cv||(cv1&&document.getElementById('hf3d1')!==cv1)||(b3cv3&&document.getElementById('hf3d2')!==b3cv3)||(pc&&document.getElementById('hfPart')!==pc)){window.removeEventListener('pointermove',onMove);try{R.dispose();if(R2)R2.dispose();if(this._R1)this._R1.dispose();if(this._R3)this._R3.dispose();}catch(err){}this._R1=null;this._c1=null;this._R3=null;this._c2=null;this._R2=null;this._R=null;this._w=0;this._h=0;this.init3D();return;}this._rafG=requestAnimationFrame(loop);
+    const loop=()=>{if(this._dead){window.removeEventListener('pointermove',onMove);return;}if(document.getElementById('hf3d')!==cv||(cv1&&document.getElementById('hf3d1')!==cv1)||(b3cv3&&document.getElementById('hf3d2')!==b3cv3)||(c4cv&&document.getElementById('hf3d3')!==c4cv)||(pc&&document.getElementById('hfPart')!==pc)){window.removeEventListener('pointermove',onMove);try{R.dispose();if(R2)R2.dispose();if(this._R1)this._R1.dispose();if(this._R3)this._R3.dispose();if(this._R4)this._R4.dispose();}catch(err){}this._R4=null;this._c3=null;this._R1=null;this._c1=null;this._R3=null;this._c2=null;this._R2=null;this._R=null;this._w=0;this._h=0;this.init3D();return;}this._rafG=requestAnimationFrame(loop);
       const t=clock.getElapsedTime();const dt=Math.min(0.05,t-(this._lt||t));this._lt=t;const tg=this._tA||0;const cur=this._Ac||0;const sp=tg>cur?0.13:0.3;this._Ac=cur+Math.sign(tg-cur)*Math.min(Math.abs(tg-cur),dt*sp);const A=this._Ac;const e=1-A;if(Math.abs((this._lastPa||0)-A)>0.01||(A===tg&&this._lastPa!==A)){this._lastPa=A;this.setState({pa:A});}SEED.value=(Math.floor(t*7)%5)*0.73;
       const w=cv.clientWidth,h=cv.clientHeight;if(w&&h&&(w!==this._w||h!==this._h)){this._w=w;this._h=h;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
       const ti=this._insp||0;const icur=this._ic||0;this._ic=icur+Math.sign(ti-icur)*Math.min(Math.abs(ti-icur),dt*1.3);const ic=sm(this._ic);const open=Math.max(sm((A-0.02)/0.09)*(1-sm((A-0.74)/0.1)),ic);const zoom=Math.max(sm((A-0.03)/0.1)*(1-sm((A-0.76)/0.12)),ic);
@@ -406,7 +428,7 @@ class Component extends DCLogic {
       shadow.scale.set(0.9+0.15*A,1,1);
       if(R2){const sl=this._photo==null?0:this._photo;if(sl!==shown){shown=sl;while(holder.children.length)holder.remove(holder.children[0]);const c=parts[sl].clone(true);c.position.set(0,0,0);c.rotation.set(0,0,0);c.scale.setScalar(1);c.updateMatrixWorld(true);const box=new T.Box3().setFromObject(c);const sz=box.getSize(V3(0,0,0));const ct=box.getCenter(V3(0,0,0));c.position.sub(ct);const wr=new T.Group();wr.add(c);wr.scale.setScalar(1.3/Math.max(sz.x,sz.y,sz.z,0.01));holder.add(wr);}
         holder.rotation.y=t*0.8;holder.rotation.x=Math.sin(t*0.6)*0.25;const pw2=pc.clientWidth,ph2=pc.clientHeight;if(pw2&&ph2&&(pw2!==this._pw||ph2!==this._ph)){this._pw=pw2;this._ph=ph2;R2.setSize(pw2,ph2,false);cam2.aspect=pw2/ph2;cam2.updateProjectionMatrix();}R2.render(sc2,cam2);}
-      R.render(scene,cam);if(this._c1)this._c1(t);if(this._c2)this._c2(t);};
+      R.render(scene,cam);if(this._c1)this._c1(t);if(this._c2)this._c2(t);if(this._c3)this._c3(t);};
     loop();this.setState({three:true});
   }
   renderVals(){
@@ -425,7 +447,7 @@ class Component extends DCLogic {
       wheel,curNum:CH[active][0],numStrip:`transform:translateY(${(-active*176).toFixed(0)}px)`,heartD:HEART_D,gearD:GEAR_D,springD:SPRING_D,leadD:LEAD_D,pp,nums,tiles,
       leadStyle:`opacity:${e.toFixed(2)}`,shL:sh(-74,8,-7),shR:sh(74,-8,6),
       c1Section:`position:relative;height:${stage}px;background:#FBFBF8;overflow:hidden;display:flex;align-items:center;justify-content:center;padding-left:${lw}px`,
-      c2Section:`position:relative;height:${Math.round(stage*3.4)}px;background:#FBFBF8;padding-left:${lw}px`,c2Sticky:`position:sticky;top:56px;height:${stage}px;display:flex;align-items:center;justify-content:center;overflow:hidden`,c2Mod:s.sel!=null?('Твой — '+OBJS[s.sel].mod+', 10 деталей именно под эту историю.'):'Выбираешь при заказе: расставание, ссора, потеря, переезд или провал.',c1Box:`position:relative;width:${(W*k1).toFixed(0)}px;height:${(H*k1).toFixed(0)}px`,
+      c2Section:`position:relative;height:${Math.round(stage*3.4)}px;background:#FBFBF8;padding-left:${lw}px`,c2Sticky:`position:sticky;top:56px;height:${stage}px;display:flex;align-items:center;justify-content:center;overflow:hidden`,c2Mod:s.sel!=null?('Твой — '+OBJS[s.sel].mod+', 10 деталей именно под эту историю.'):'Выбираешь при заказе: расставание, ссора, потеря, переезд или провал.',c3Section:`position:relative;height:${stage}px;background:#FBFBF8;background-image:radial-gradient(rgba(110,159,230,.22) 1px,transparent 1.3px);background-size:14px 14px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding-left:${lw}px`,c3Cls:'c3-card k'+(s.p3||0),p3:(()=>{const i=s.p3||0;const d=PARTS_INFO[i];const PR=[590,390,-1,290,190,790,250,-2,99,490,350,190,320,450,270,390];const pr=PR[i];const price=pr===-1?'не продаётся':(pr===-2?'0 ₽':pr+' ₽');const buy=pr===-1?'ставит только близкий':(pr===-2?'просто позвони':'Докупить деталь');return {n:String(i+1).padStart(2,'0'),day:String(i+1),name:d[0],desc:d[1],note:d[2],price,buy,off:pr<0?'true':'false',priceCls:'c3-price'+(pr===-1?' free':''),buyCls:'c3-buyb'+(pr<0?' off':'')};})(),c3prev:()=>this.setState({p3:((s.p3||0)+15)%16}),c3next:()=>this.setState({p3:((s.p3||0)+1)%16}),c3cells:PARTS_INFO.map((d,i)=>({n:String(i+1).padStart(2,'0'),label:'№'+String(i+1).padStart(2,'0')+' — '+d[0],cls:'c3cell'+(i===(s.p3||0)?' on':''),pressed:i===(s.p3||0)?'true':'false',pick:()=>this.setState({p3:i})})),c1Box:`position:relative;width:${(W*k1).toFixed(0)}px;height:${(H*k1).toFixed(0)}px`,
       c1Inner:`position:absolute;left:0;top:0;width:${W}px;height:${H}px;transform-origin:top left;transform:scale(${k1.toFixed(4)})`,
       flatStyle:s.three?'display:none':'position:absolute;left:452px;top:246px;width:500px;height:490px',
       tag3d:s.three?'position:absolute;left:452px;top:712px;font-size:10px;color:#4C4C47':'display:none',

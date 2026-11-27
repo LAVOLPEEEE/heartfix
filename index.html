@@ -7,7 +7,7 @@
 <meta name="description" content="heartfix HF-01 — ремкомплект для разбитого сердца: 26 деталей на 26 дней.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800;900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=202611271459">
+<link rel="stylesheet" href="css/style.css?v=202611271555">
 </head>
 <body>
 <div id="hf-loader" class="ld" role="status" aria-label="Загружаем heartfix">
@@ -20,10 +20,10 @@
 <div class="ld-msg ld-last" style="--d:6.3s"><span class="ld-who">он · 02:14 · прочитано</span>Я&nbsp;тебя никогда не&nbsp;любил.</div>
 </div>
 <div class="ld-heart">
-<img class="ld-ghost" src="img/heart-whole.webp?v=202611271459" alt="" width="320" height="411">
+<img class="ld-ghost" src="img/heart-whole.webp?v=202611271555" alt="" width="320" height="411">
 <div class="ld-fill">
-<img class="ld-hl" src="img/heart-whole.webp?v=202611271459" alt="" width="320" height="411">
-<img class="ld-hr" src="img/heart-whole.webp?v=202611271459" alt="" width="320" height="411">
+<img class="ld-hl" src="img/heart-whole.webp?v=202611271555" alt="" width="320" height="411">
+<img class="ld-hr" src="img/heart-whole.webp?v=202611271555" alt="" width="320" height="411">
 </div>
 <svg class="ld-crack" viewBox="0 0 320 411" aria-hidden="true"><polyline pathLength="1" points="166,0 166,138 149,179 176,215 152,256 182,296 162,341 186,411" fill="none" stroke="#121212" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"/></svg>
 <span class="ld-sh ld-sh1"></span><span class="ld-sh ld-sh2"></span><span class="ld-sh ld-sh3"></span>
@@ -180,7 +180,7 @@ function hfCrack(ctx){
 <div class="c1-diag" aria-live="polite">
 <div class="c1-bar"><span>heartfix.exe — твой набор</span><span class="c1-win" aria-hidden="true"><i></i><i></i></span></div>
 <template data-if="c1None"><div class="c1-empty">
-<img class="c1-ghost" src="img/heart-whole.webp?v=202611271459" alt="" width="150" height="193">
+<img class="c1-ghost" src="img/heart-whole.webp?v=202611271555" alt="" width="150" height="193">
 <p class="c1-e1">Здесь появится твой набор</p>
 <p class="c1-e2">← выбери карточку слева</p>
 </div></template>
@@ -232,12 +232,42 @@ function hfCrack(ctx){
 <div class="c2-prog" aria-hidden="true"><i></i></div>
 </div>
 </section>
+<section id="ch-03" data-bt-style="[[c3Section]]">
+<canvas id="hf3d3" aria-hidden="true" style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none"></canvas>
+<div data-bt-style="[[c1Box]]">
+<div data-bt-style="[[c1Inner]]">
+<div class="c3-left">
+<div class="c3-kick">глава 03 · комплект</div>
+<h2 class="c3-h">16 базовых деталей</h2>
+<p class="c3-lead">Нужны при любой поломке. Ставятся по&nbsp;одной в&nbsp;день, строго по&nbsp;порядку номеров.</p>
+<div data-bt-class="[[c3Cls]]" aria-live="polite">
+<div class="c3-row"><span class="c3-no">№<span data-text="p3.n"></span></span><span class="c3-day">день <span data-text="p3.day"></span> из&nbsp;26</span></div>
+<h3 class="c3-name"><span data-text="p3.name"></span></h3>
+<p class="c3-desc"><span data-text="p3.desc"></span></p>
+<p class="c3-note"><span aria-hidden="true">↳ </span><span data-text="p3.note"></span></p>
+<div class="c3-buy"><span data-bt-class="[[p3.priceCls]]"><span data-text="p3.price"></span></span><a href="#ch-01" data-bt-class="[[p3.buyCls]]" data-bt-aria-disabled="[[p3.off]]"><span data-text="p3.buy"></span></a></div>
+</div>
+<div class="c3-nav"><button type="button" class="c3-btn" data-bt-onclick="[[c3prev]]" aria-label="Предыдущая деталь">← пред.</button><span class="c3-count"><span data-text="p3.n"></span> / 16</span><button type="button" class="c3-btn" data-bt-onclick="[[c3next]]" aria-label="Следующая деталь">след. →</button></div>
+<p class="c3-lost">Потерялась деталь? Докупи отдельно — привезём за&nbsp;<span style="white-space:nowrap">2–3 дня</span>.</p>
+</div>
+<div class="c3-view" aria-hidden="true">
+<svg class="c3-call" viewBox="0 0 420 520" fill="none" stroke="#121212" stroke-linecap="round"><circle class="c3-ring" cx="210" cy="250" r="178" stroke-width="1.4" stroke-dasharray="6 7"/><path d="M60 470 H360 M60 462 V478 M360 462 V478" stroke-width="1.4"/><path d="M332 110 L380 62 H412" stroke-width="1.4"/><circle cx="332" cy="110" r="4" fill="#2B6BF0" stroke="none"/></svg>
+<span class="c3-fig">fig. <span data-text="p3.n"></span></span><span class="c3-dim">1 шт. · ставится в&nbsp;день <span data-text="p3.day"></span></span>
+</div>
+<div class="c3-grid" role="group" aria-label="Детали базового комплекта">
+<svg class="c3-frame" viewBox="0 0 400 400" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="#121212" stroke-linecap="round"><path d="M3 3 H397 V397 H3 Z M100 3 V397 M200 3 V397 M300 3 V397 M3 100 H397 M3 200 H397 M3 300 H397" stroke-width="4.5" filter="url(#wobB)"/></svg>
+<template data-for="c3cells" data-as="c"><button type="button" data-bt-class="[[c.cls]]" data-bt-onclick="[[c.pick]]" data-bt-aria-pressed="[[c.pressed]]" data-bt-aria-label="[[c.label]]"><span class="c3-cn"><span data-text="c.n"></span></span><span class="c3-slot"></span></button></template>
+</div>
+<p class="c3-hint">нажми на&nbsp;ячейку, чтобы рассмотреть деталь</p>
+</div>
+</div>
+</section>
 
 </div>
 </div>
 </div>
-<script src="js/three.min.js?v=202611271459"></script>
-<script src="js/binder.js?v=202611271459"></script>
-<script src="js/main.js?v=202611271459"></script>
+<script src="js/three.min.js?v=202611271555"></script>
+<script src="js/binder.js?v=202611271555"></script>
+<script src="js/main.js?v=202611271555"></script>
 </body>
 </html>
