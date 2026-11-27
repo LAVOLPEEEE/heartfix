@@ -170,6 +170,7 @@ html.ld-lock{overflow:hidden}
 #ch-02 .c2-left>*{opacity:0;translate:0 18px;transition:opacity .6s ease,translate .7s cubic-bezier(.2,.9,.25,1)}
 #ch-02.c2-in .c2-left>*{opacity:1;translate:0 0}
 #ch-02.c2-in .c2-left>:nth-child(2){transition-delay:.08s}#ch-02.c2-in .c2-left>:nth-child(3){transition-delay:.16s}#ch-02.c2-in .c2-left>:nth-child(4){transition-delay:.24s}
+#ch-02.c2-in:not([data-step="0"]) .c2-left>.c2-hint{opacity:0;pointer-events:none}
 #ch-02 .c2-left>.c2-cta{opacity:0}#ch-02.c2-in[data-step="3"] .c2-left>.c2-cta{opacity:1}
 #ch-02:not(.c2-3d) .c2-left>*{opacity:1;translate:none}
 /* chapter 01: titles sit on the same bottom line whether they take one line or two; the panel hugs its text */
