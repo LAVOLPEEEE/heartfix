@@ -118,8 +118,10 @@
         var list = get(ctx, it.path) || [];
         var sig = signature(list);
         if (sig !== it.sig) {
-          clearGen(it); it.kids = [];
-          for (var k = 0; k < list.length; k++) it.kids.push(stamp(it));
+          if (!(it.kids.length && it.kids.length === list.length)) {
+            clearGen(it); it.kids = [];
+            for (var k = 0; k < list.length; k++) it.kids.push(stamp(it));
+          }
           it.sig = sig;
         }
         for (var q = 0; q < it.kids.length; q++) {
